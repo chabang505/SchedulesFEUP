@@ -6,6 +6,7 @@
 #define PROJ1_CLASSUC_H
 
 #include <string>
+#include <sstream>
 using namespace std;
 
 class ClassUC {
@@ -21,6 +22,7 @@ class ClassUC {
     void setCodeClass(newCodeClass);
     bool operator==(const ClassUC& c2) const;
     string write() const;
+
 };
 
 
