@@ -4,7 +4,7 @@
 
 #include "ClassSchedule.h"
 
-ClassSchedule::ClassSchedule(string cuc, string cc, List<Slot> s): codeUC(cuc), codeClass(cc), slots(s) {}
+ClassSchedule::ClassSchedule(string cuc, string cc, list<Slot> s): codeUC(cuc), codeClass(cc), slots(s) {}
 ClassSchedule::ClassSchedule(const ClassSchedule &cs1) {
     this->codeUC = cs1.codeUC;
     this->codeClass = cs1.codeClass;
@@ -19,9 +19,9 @@ string ClassSchedule::getCodeClass() { return this->codeClass; }
 
 void ClassSchedule::setCodeClass(string newCodeClass) { this->codeClass = newCodeClass; }
 
-List<Slot> ClassSchedule::getSlots() { return slots; }
+list<Slot> ClassSchedule::getSlots() { return slots; }
 
-void ClassSchedule::setSlots(const List<Slot> &newSlots) { this->slots = newSlots; }
+void ClassSchedule::setSlots(const list<Slot> &newSlots) { this->slots = newSlots; }
 
 void ClassSchedule::addSlot(Slot &s1) {
     slots.push_back(s1);

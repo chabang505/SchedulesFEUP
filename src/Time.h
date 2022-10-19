@@ -7,12 +7,14 @@
 
 #include <string>
 #include <sstream>
+using namespace std;
 
 class Time {
 
-    int const hour;
-    int const minute;
+    int hour;
+    int minute;
 
+public:
     Time();
     Time(int h, int m);
     Time(const Time& t1);

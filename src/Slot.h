@@ -19,6 +19,7 @@ class Slot {
     Time end;
     string type;
 
+public:
     Slot(int wd, Time& s, Time& e, string t);
     Slot(const Slot& s1);
     int getWeekDay();
@@ -33,6 +34,5 @@ class Slot {
     string write() const;
 
 };
-
 
 #endif //PROJ1_SLOT_H

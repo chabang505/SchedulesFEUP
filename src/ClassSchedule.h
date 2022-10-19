@@ -6,23 +6,25 @@
 #define PROJ1_CLASSSCHEDULE_H
 
 #include <string>
-#include <List>
+#include <list>
 
 #include "Slot.h"
+
+using namespace std;
 
 class ClassSchedule {
     string codeUC;
     string codeClass;
-    List<Slot> slots;
+    list<Slot> slots;
 
-    ClassSchedule(string cuc, string cc, List<Slot> s);
+    ClassSchedule(string cuc, string cc, list<Slot> s);
     ClassSchedule(const ClassSchedule& cs1);
     string getCodeUC();
     void setCodeUC(string newCodeUC);
     string getCodeClass();
     void setCodeClass(string newCodeClass);
-    List<Slot> getSlots();
-    void setSlots(const List<Slot> &newSlots);
+    list<Slot> getSlots();
+    void setSlots(const list<Slot> &newSlots);
     void addSlot(Slot& s1);
     int numOfSlots();
 

@@ -14,12 +14,13 @@ class ClassUC {
     string codeUC;
     string codeClass;
 
+public:
     ClassUC(string cUC, string cc);
     ClassUC(const ClassUC& c1);
     string getCodeUC();
-    void setCodeUC(newCodeUC);
+    void setCodeUC(string newCodeUC);
     string getCodeClass();
-    void setCodeClass(newCodeClass);
+    void setCodeClass(string newCodeClass);
     bool operator==(const ClassUC& c2) const;
     string write() const;
 
