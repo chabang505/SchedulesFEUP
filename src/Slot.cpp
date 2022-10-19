@@ -1,5 +1,5 @@
 //
-// Created by johny on 18/10/2022.
+// Created by Joao Ribeiro on 18/10/2022.
 //
 
 #include "Slot.h"
@@ -27,7 +27,7 @@ void Slot::setEnd(const Time &newEnd) { this->end = newEnd; }
 
 string Slot::getType() { return this->type; }
 
-void Slot::setType(int newType) { this->type = newType; }
+void Slot::setType(string newType) { this->type = newType; }
 
 bool Slot::operator==(const Slot &s2) const {
     return (this->weekDay == s2.weekDay &&
