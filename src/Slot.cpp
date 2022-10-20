@@ -4,7 +4,7 @@
 
 #include "Slot.h"
 
-Slot::Slot(int wd, Time& s, Time& e, string t): weekDay(wd), start(s), end(e), type(t) {}
+Slot::Slot(int wd, float s, float e, string t): weekDay(wd), start(s), end(e), type(t) {}
 
 Slot::Slot(const Slot& s1) {
     this->weekDay = s1.weekDay;
@@ -17,13 +17,13 @@ int Slot::getWeekDay() { return this->weekDay; }
 
 void Slot::setWeekDay(int newWeekDay) { this->weekDay = newWeekDay; }
 
-Time Slot::getStart() { return this->start; }
+float Slot::getStart() { return this->start; }
 
-void Slot::setStart(const Time &newStart) { this->start = newStart; }
+void Slot::setStart(float newStart) { this->start = newStart; }
 
-Time Slot::getEnd() { return this->end; }
+float Slot::getEnd() { return this->end; }
 
-void Slot::setEnd(const Time &newEnd) { this->end = newEnd; }
+void Slot::setEnd(float newEnd) { this->end = newEnd; }
 
 string Slot::getType() { return this->type; }
 
@@ -62,6 +62,6 @@ string Slot::write() const {
             dayOfTheWeek = "Sat";
             break;
     }
-    oss << dayOfTheWeek << "\n" << start.write() << "\n" << end.write() << "\n" << type;
+    oss << dayOfTheWeek << "\n" << start << "\n" << end << "\n" << type;
     return oss.str();
 }

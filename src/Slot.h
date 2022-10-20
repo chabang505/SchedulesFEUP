@@ -8,26 +8,24 @@
 #include <string>
 #include <sstream>
 
-#include "Time/Time.h"
-
 using namespace std;
 
 class Slot {
 
     int weekDay;
-    Time start;
-    Time end;
+    float start;
+    float end;
     string type;
 
 public:
-    Slot(int wd, Time& s, Time& e, string t);
+    Slot(int wd, float s, float e, string t);
     Slot(const Slot& s1);
     int getWeekDay();
     void setWeekDay(int newWeekDay);
-    Time getStart();
-    void setStart(const Time& newStart);
-    Time getEnd();
-    void setEnd(const Time& newEnd);
+    float getStart();
+    void setStart(float newStart);
+    float getEnd();
+    void setEnd(float newEnd);
     string getType();
     void setType(string newType);
     bool operator==(const Slot& s2) const;

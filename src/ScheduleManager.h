@@ -10,12 +10,14 @@
 
 #include "Request.h"
 #include "Student.h"
+#include "ClassSchedule.h"
 
 using namespace std;
 
 class ScheduleManager {
     set<Student> students;
     queue<Request> requests;
+    list<ClassSchedule> classes;
 
 };
 
