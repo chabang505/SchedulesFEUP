@@ -19,6 +19,23 @@ class ScheduleManager {
     queue<Request> requests;
     list<ClassSchedule> classes;
 
+public:
+    void readClassesFile(File file);
+    void readClassesPerUC(File file);
+    void readStudentsFile(File file);
+
+    void receiveRequest(Request request);
+
+    void orderByUCCode();
+    void orderByName();
+    // mais funcoes de ordenaçao
+
+    // funcoes de consulta:
+    // - recolha de todos os dados necessarios para uma lista temporaria
+    // - ordenar essa lista de acordo com o criterio do utilizador
+
+
+
 };
 
 

@@ -13,6 +13,8 @@ class ClassUC {
 
     string codeUC;
     string codeClass;
+    int numStudents;
+    int const static cap = 30;
 
 public:
     ClassUC(string cUC, string cc);
