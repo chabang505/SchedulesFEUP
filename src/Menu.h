@@ -24,6 +24,7 @@ public:
     string addStudent(ScheduleManager manager, Request request);
     string changeStudentClass(ScheduleManager manager, Request request);
     string changeStudentClasses(ScheduleManager manager, Request request);
+
 };
 
 

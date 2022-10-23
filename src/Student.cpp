@@ -23,3 +23,4 @@ int Student::getId() { return this->id; }
 void Student::setId(int newId) { this->id = newId; }
 
 list<ClassUC> Student::getClasses() { return this->classes; }
+

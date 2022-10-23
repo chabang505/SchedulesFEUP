@@ -21,9 +21,9 @@ class ScheduleManager {
 
 public:
     ScheduleManager();
-    void readClassesFile(File file);
-    void readClassesPerUC(File file);
-    void readStudentsFile(File file);
+    void readClassesFile(const string& file);
+    void readClassesPerUC(const string& file);
+    void readStudentsFile(const string& file);
 
     void receiveRequest(Request request);
 

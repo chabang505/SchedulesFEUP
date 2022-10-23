@@ -3,8 +3,34 @@
 //
 
 #include "ScheduleManager.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
 ScheduleManager::ScheduleManager() = default;
+
+
+void ScheduleManager::readClassesFile(const string& file){
+    ifstream in(fname);
+    for (string line; getline(in, line)){
+
+    }
+}
+
+
+void ScheduleManager::readClassesPerUC(const string& file){
+    ifstream in(fname);
+    for (string line; getline(in, line)) {
+
+    }
+}
+
+void ScheduleManager::readStudentsFile(const string& file){
+    ifstream in(fname);
+    for (string line; getline(in, line)) {
+
+    }
+}
 
 void ScheduleManager::receiveRequest(Request request) {
     this->requests.push(request);
