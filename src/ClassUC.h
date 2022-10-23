@@ -25,6 +25,8 @@ public:
     void setCodeClass(string newCodeClass);
     bool operator==(const ClassUC& c2) const;
     string write() const;
+    int getNumStudents();
+
 
 };
 
