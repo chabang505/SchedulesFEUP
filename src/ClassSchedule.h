@@ -17,6 +17,7 @@ class ClassSchedule {
     string codeClass;
     list<Slot> slots;
 
+public:
     ClassSchedule(string cuc, string cc, list<Slot> s);
     ClassSchedule(const ClassSchedule& cs1);
     string getCodeUC();

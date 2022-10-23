@@ -5,8 +5,11 @@
 #ifndef PROJ1_MENU_H
 #define PROJ1_MENU_H
 
+#include "ScheduleManager.h"
+
 
 class Menu {
+    ScheduleManager manager = ScheduleManager();
 
 public:
 
@@ -15,6 +18,12 @@ public:
         listPronta = enviaPedidoParaScheduleManager;
         display(listPronta);
     }
+
+    // student request methods
+    string removeStudent(ScheduleManager manager, Request request);
+    string addStudent(ScheduleManager manager, Request request);
+    string changeStudentClass(ScheduleManager manager, Request request);
+    string changeStudentClasses(ScheduleManager manager, Request request);
 };
 
 

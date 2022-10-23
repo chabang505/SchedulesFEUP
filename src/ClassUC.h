@@ -14,7 +14,7 @@ class ClassUC {
     string codeUC;
     string codeClass;
     int numStudents;
-    int const static cap = 30;
+    int const static cap = 30; // max number of students in a class
 
 public:
     ClassUC(string cUC, string cc);

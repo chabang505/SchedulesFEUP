@@ -4,10 +4,11 @@
 
 #include "ClassUC.h"
 
-ClassUC::ClassUC(string cUC, string cc): codeUC(cUC), codeClass(cc) {}
+ClassUC::ClassUC(string cUC, string cc): codeUC(cUC), codeClass(cc), numStudents(0) {}
 ClassUC::ClassUC(const ClassUC& c1) {
     this->codeUC = c1.codeUC;
     this->codeClass = c1.codeClass;
+    this->numStudents = 0;
 }
 
 string ClassUC::getCodeUC() { return this->codeUC; }

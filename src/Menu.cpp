@@ -3,3 +3,23 @@
 //
 
 #include "Menu.h"
+
+string Menu::removeStudent(ScheduleManager manager, Request request) {
+    string reply = manager.removeStudent(request);
+    return reply;
+}
+
+string Menu::addStudent(ScheduleManager manager, Request request) {
+    string reply = manager.addStudent(request);
+    return reply;
+}
+
+string Menu::changeStudentClass(ScheduleManager manager, Request request) {
+    string reply = manager.changeStudentClass(request);
+    return reply;
+}
+
+string Menu::changeStudentClasses(ScheduleManager manager, Request request) {
+    string reply = manager.changeStudentClasses(request);
+    return reply;
+}

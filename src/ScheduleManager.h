@@ -20,6 +20,7 @@ class ScheduleManager {
     list<ClassSchedule> classes;
 
 public:
+    ScheduleManager();
     void readClassesFile(File file);
     void readClassesPerUC(File file);
     void readStudentsFile(File file);
@@ -33,6 +34,12 @@ public:
     // funcoes de consulta:
     // - recolha de todos os dados necessarios para uma lista temporaria
     // - ordenar essa lista de acordo com o criterio do utilizador
+
+    string removeStudent(Request request);
+    string addStudent(Request request);
+    string changeStudentClass(Request request);
+    string changeStudentClasses(Request request);
+
 
 
 
