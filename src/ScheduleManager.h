@@ -17,7 +17,8 @@ using namespace std;
 class ScheduleManager {
     set<Student> students;
     queue<Request> requests;
-    list<ClassSchedule> classes;
+    vector<ClassSchedule> classes; //mudei pra vector, pra facilitar o sort
+
 
 public:
     ScheduleManager();
@@ -27,8 +28,10 @@ public:
 
     void receiveRequest(Request request);
 
+
     void orderByUCCode();
     void orderByName();
+
     // mais funcoes de ordenaçao
 
     // funcoes de consulta:
