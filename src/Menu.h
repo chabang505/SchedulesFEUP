@@ -12,13 +12,13 @@ class Menu {
     ScheduleManager manager = ScheduleManager();
 
 public:
-
+/*
     void consultaMenu() {
         recebePedido;
         listPronta = enviaPedidoParaScheduleManager;
         display(listPronta);
     }
-
+*/
     // student request methods
     string removeStudent(ScheduleManager manager, Request request);
     string addStudent(ScheduleManager manager, Request request);

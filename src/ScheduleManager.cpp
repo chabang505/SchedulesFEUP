@@ -10,24 +10,41 @@
 
 ScheduleManager::ScheduleManager() = default;
 
-
+/**
+ * Reads the CSV file containing information on classes, placing it in a vector of classes
+ * @param fname is the name of the file to read
+ */
 void ScheduleManager::readClassesFile(const string& fname){
     //the string fname is the name of the file
-    ifstream in(fname); //opens the file
-    for (string line; getline(in, line);){
-
-
+    ifstream in(fname, ios::in); //opens the file
+    string line;
+    getline(in, line);
+    while (line != "") {
+        getline(in, line);
+        stringstream s(line);
     }
 }
 
-
-void ScheduleManager::readClassesPerUC(const string& fname){
+/**
+ * Reads the CSV file containing information classes for each UC, placing it in a vector
+ * @param fname is the name of the file to read
+ */
+void ScheduleManager::readClassesPerUC(const string fname){
     //the string fname is the name of the file
-    ifstream in(fname); //opens the file
-    for (string line; getline(in, line);){
-
-
+    vector<string> row;
+    string line, word;
+    ifstream file(fname);
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            row.clear();
+            stringstream str(line);
+            while (getline(str, word, ',')) {
+                row.push_back(word);
+            }
+        }
     }
+    else
+        cout << "Could not open the file" << endl;
 }
 
 void ScheduleManager::readStudentsFile(const string& fname){

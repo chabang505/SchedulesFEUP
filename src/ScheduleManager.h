@@ -23,11 +23,10 @@ class ScheduleManager {
 public:
     ScheduleManager();
     void readClassesFile(const string& file);
-    void readClassesPerUC(const string& file);
+    void readClassesPerUC(const string file);
     void readStudentsFile(const string& file);
 
     void receiveRequest(Request request);
-
 
     void orderByUCCode();
     void orderByName();
