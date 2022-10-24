@@ -23,6 +23,10 @@ bool ClassUC::operator==(const ClassUC &c2) const {
     return (this->codeUC == c2.codeUC && this->codeClass == c2.codeClass);
 }
 
+int ClassUC::getNumStudents(){
+    return numStudents;
+}
+
 string ClassUC::write() const {
     stringstream oss;
     oss << codeUC << "\n" << codeClass;

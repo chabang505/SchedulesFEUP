@@ -17,18 +17,21 @@ using namespace std;
 class ScheduleManager {
     set<Student> students;
     queue<Request> requests;
-    list<ClassSchedule> classes;
+    vector<ClassSchedule> classes; //mudei pra vector, pra facilitar o sort
+
 
 public:
     ScheduleManager();
-    void readClassesFile(File file);
-    void readClassesPerUC(File file);
-    void readStudentsFile(File file);
+    void readClassesFile(const string& file);
+    void readClassesPerUC(const string& file);
+    void readStudentsFile(const string& file);
 
     void receiveRequest(Request request);
 
+
     void orderByUCCode();
     void orderByName();
+
     // mais funcoes de ordenaçao
 
     // funcoes de consulta:
