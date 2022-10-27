@@ -10,10 +10,6 @@
 
 ScheduleManager::ScheduleManager() = default;
 
-/**
- * Reads the CSV file containing information on classes, placing it in a vector of classes
- * @param fname is the name of the file to read
- */
 void ScheduleManager::readClassesFile(const string& fname){
     //the string fname is the name of the file
     ifstream in(fname, ios::in); //opens the file
@@ -25,10 +21,6 @@ void ScheduleManager::readClassesFile(const string& fname){
     }
 }
 
-/**
- * Reads the CSV file containing information classes for each UC, placing it in a vector
- * @param fname is the name of the file to read
- */
 void ScheduleManager::readClassesPerUC(const string fname){
     //the string fname is the name of the file
     vector<string> row;
