@@ -27,10 +27,12 @@ public:
     void readStudentsFile(const string& file);
 
     void receiveRequest(Request request);
+    list<string> getUCCodeByYear(char year);
 
 
     void orderByUCCode();
     void orderByName();
+
 
     // mais funcoes de ordenaçao
 
@@ -42,7 +44,6 @@ public:
     string addStudent(Request request);
     string changeStudentClass(Request request);
     string changeStudentClasses(Request request);
-
 
 
 

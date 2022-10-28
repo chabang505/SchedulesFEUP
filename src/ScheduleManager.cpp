@@ -86,3 +86,19 @@ void ScheduleManager::orderByName(){
     }
     sort(stemp.begin(), stemp.end(), sortName);
 }
+
+list<string> ScheduleManager::getUCCodeByYear(char year) {
+    list<string> listuc;
+    if(year<=0 || year>3){
+        return listuc; //empty list or print a statement saying not valid input
+    }
+    for (ClassSchedule x: classes) {
+        if (x.getCodeClass()[0]==year){
+            listuc.push_back(x.getCodeUC());
+
+        }
+    }
+    listuc.sort();
+    listuc.unique();
+    return listuc;
+}
