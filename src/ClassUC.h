@@ -7,11 +7,13 @@
 
 #include <string>
 #include <sstream>
+#include "Student.h"
 using namespace std;
 
 class ClassUC {
 
     string codeUC;
+    vector <Student> s;
     string codeClass;
     int numStudents;
     int const static cap = 30; // max number of students in a class

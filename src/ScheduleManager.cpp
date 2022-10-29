@@ -87,7 +87,7 @@ void ScheduleManager::orderByName(){
     sort(stemp.begin(), stemp.end(), sortName);
 }
 
-list<string> ScheduleManager::getUCCodeByYear(char year) {
+list<string> ScheduleManager::getUCCodeByYear(int year) {
     list<string> listuc;
     if(year<=0 || year>3){
         return listuc; //empty list or print a statement saying not valid input
@@ -101,4 +101,20 @@ list<string> ScheduleManager::getUCCodeByYear(char year) {
     listuc.sort();
     listuc.unique();
     return listuc;
+
 }
+int ScheduleManager::getNumStudentsByYear(int year) {
+    int num=0; //numstudents;
+   for(Student s: students){
+       int cont=0;
+       auto l=s.getClasses();
+       for(ClassUC c: l){
+           if ((c.getCodeUC())[0]==year){
+               cont++;
+           }
+       }
+       if(cont>0) num++;
+   }
+   return num;
+}
+

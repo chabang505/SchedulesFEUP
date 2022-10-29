@@ -24,8 +24,9 @@ bool ClassUC::operator==(const ClassUC &c2) const {
 }
 
 int ClassUC::getNumStudents(){
-    return numStudents;
+    this->numStudents=;
 }
+
 
 string ClassUC::write() const {
     stringstream oss;

@@ -27,7 +27,6 @@ public:
     void readStudentsFile(const string& file);
 
     void receiveRequest(Request request);
-    list<string> getUCCodeByYear(char year);
 
 
     void orderByUCCode();
@@ -47,6 +46,9 @@ public:
 
 
 
+    list<string> getUCCodeByYear(int year);
+
+    int getNumStudentsByYear(int year);
 };
 
 
