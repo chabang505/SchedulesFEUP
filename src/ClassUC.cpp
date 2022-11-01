@@ -24,7 +24,7 @@ bool ClassUC::operator==(const ClassUC &c2) const {
 }
 
 int ClassUC::getNumStudents(){
-    this->numStudents=;
+    this->numStudents;
 }
 
 

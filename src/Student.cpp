@@ -3,6 +3,7 @@
 //
 
 #include "Student.h"
+#include "ClassUC.h"
 
 using namespace std;
 
@@ -22,5 +23,23 @@ int Student::getId() { return this->id; }
 
 void Student::setId(int newId) { this->id = newId; }
 
-list<ClassUC> Student::getClasses() { return this->classes; }
+list<ClassUC> Student::getClasses() {
+
+    return this->classes;
+}
+list<string> Student::getCodeClasses() { //turmas
+    list<string> res;
+    for (ClassUC c: classes){
+        res.push_back(c.getCodeClass());
+    }
+    return res;
+}
+list<string> Student::getCodeUC() { //cadeiras
+    list<string> res;
+    for (ClassUC c: classes){
+        res.push_back(c.getCodeUC());
+    }
+    return res;
+}
+
 

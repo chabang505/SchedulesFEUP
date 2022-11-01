@@ -25,6 +25,10 @@ public:
     int getId();
     void setId(int newId);
     list<ClassUC> getClasses();
+
+    list<string> getCodeClasses();
+
+    list<string> getCodeUC();
 };
 
 
