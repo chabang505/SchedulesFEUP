@@ -22,10 +22,6 @@ class ScheduleManager {
     vector<ClassSchedule> classSchedules; //mudei pra vector, pra facilitar o sort
     set<ClassUC> classUCs;
 
-    list<Year>
-    Year = list<UC>
-            UC = list<turmas>
-                    turma = list<student>
 
 public:
     /**

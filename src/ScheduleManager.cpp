@@ -10,47 +10,34 @@
 ScheduleManager::ScheduleManager() = default;
 
 void ScheduleManager::readClassesFile(const string& fname){
-    //the string fname is the name of the file
-    ifstream in(fname, ios::in); //opens the file
-    string line;
-    getline(in, line);
-    while (line != "") {
-        getline(in, line);
-        stringstream s(line);
-    }
+    
 }
 
 void ScheduleManager::readClassesPerUC(const string& fname){
     string line;
     ifstream file(fname);
-    getline(file, line);
     if (file.is_open()) {
-        string codeUC;
-        string codeClass;
+        getline(file, line);
+        string codeUC, codeClass;
         while (getline(file, line)) {
             stringstream inputString(line);
             getline(inputString, codeUC, ',');
             getline(inputString, codeClass, ',');
-            ClassUC c1 = *new ClassUC(codeUC, codeClass);
+            ClassUC c1 = ClassUC(codeUC, codeClass);
             classUCs.insert(c1);
         }
-    }
-    else
+    } else
         cout << "Could not open the file" << endl;
 }
 
 void ScheduleManager::readStudentsFile(const string& fname){
-    //the string fname is the name of the file
     string line;
     ifstream file(fname);
-    getline(file, line);
     if (file.is_open()) {
-        string name;
-        string temp_string;
+        getline(file, line);
+        string name, temp_string, codeUC, codeClass;
         int current_id = 0;
         int previous_id = current_id;
-        string codeUC;
-        string codeClass;
         list<ClassUC> classes;
         classes.clear();
         while (getline(file, line)) {
@@ -62,7 +49,7 @@ void ScheduleManager::readStudentsFile(const string& fname){
             } else if (previous_id == current_id) {
                 getline(inputString, temp_string, ',');
             } else if (previous_id != current_id) {
-                Student s1 = *new Student(previous_id, name, classes);
+                Student s1 = Student(previous_id, name, classes);
                 students.insert(s1);
                 classes.clear();
                 getline(inputString, name, ',');
@@ -70,7 +57,7 @@ void ScheduleManager::readStudentsFile(const string& fname){
             previous_id = current_id;
             getline(inputString, codeUC, ',');
             getline(inputString, codeClass, ',');
-            ClassUC c1 = *new ClassUC(codeUC, codeClass);
+            ClassUC c1 = ClassUC(codeUC, codeClass);
             classes.push_back(c1);
         }
     } else {
@@ -113,7 +100,7 @@ void ScheduleManager::createClassStudents(const string& fname) {
                 classStudents[index].addStudent(id);
             } else {
                 students.push_back(id);
-                ClassStudents c1 = *new ClassStudents(codeUC, codeClass, students);
+                ClassStudents c1 = ClassStudents(codeUC, codeClass, students);
                 classStudents.push_back(c1);
             }
         }

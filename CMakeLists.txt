@@ -32,4 +32,4 @@ endif(DOXYGEN_FOUND)
 
 add_executable(SchedulesFEUP main.cpp src/ScheduleManager.cpp src/Request.cpp
         src/Student.cpp src/ClassSchedule.cpp src/ClassUC.cpp src/Slot.cpp
-        src/Menu.cpp src/ClassStudents.cpp src/StudentCard.cpp src/Turma.cpp)
+        src/Menu.cpp src/ClassStudents.cpp src/StudentCard.cpp src/Turma.cpp src/UC.cpp src/Year.cpp)
