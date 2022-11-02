@@ -32,3 +32,10 @@ string ClassUC::write() const {
     oss << codeUC << "\n" << codeClass;
     return oss.str();
 }
+
+bool ClassUC::operator< (const ClassUC& c2) const {
+    if (this->codeClass == c2.codeClass)
+        return this->codeUC < c2.codeUC;
+    else
+        return this->codeClass < c2.codeClass;
+}
