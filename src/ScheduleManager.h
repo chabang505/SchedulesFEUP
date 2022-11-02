@@ -11,11 +11,13 @@
 #include "Request.h"
 #include "Student.h"
 #include "ClassSchedule.h"
+#include "ClassStudents.h"
 
 using namespace std;
 
 class ScheduleManager {
     set<Student> students;
+    list<ClassStudents> classStudents;
     queue<Request> requests;
     vector<ClassSchedule> classes; //mudei pra vector, pra facilitar o sort
 
