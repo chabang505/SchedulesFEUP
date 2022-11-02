@@ -17,11 +17,15 @@ using namespace std;
 
 class ScheduleManager {
     set<Student> students;
-    list<ClassStudents> classStudents;
+    vector<ClassStudents> classStudents;
     queue<Request> requests;
     vector<ClassSchedule> classSchedules; //mudei pra vector, pra facilitar o sort
     set<ClassUC> classUCs;
 
+    list<Year>
+    Year = list<UC>
+            UC = list<turmas>
+                    turma = list<student>
 
 public:
     /**
@@ -39,13 +43,28 @@ public:
      * Reads the CSV file containing information on the classes for each UC
      * @param file Name of the file to be read
      */
-    void readClassesPerUC(string file);
+    void readClassesPerUC(const string& fname);
 
     /**
      * Reads the CSV file containing information on the students
      * @param file
      */
-    void readStudentsFile(const string& file);
+    void readStudentsFile(const string& fname);
+
+    /**
+     * Checks if a certain class and UC are already in a ClassStudents vector
+     * @param classes Vector of ClassStudents objects
+     * @param codeUC String with the code of the UC
+     * @param codeClass String with the code of the class
+     * @return Index of the element, if found, -1 otherwise
+     */
+    int hasClass(vector<ClassStudents> classes, string& codeUC, string& codeClass);
+
+    /**
+     * Reads students CSV file to create vector of ClassStudents
+     * @param fname Name of the file to be read
+     */
+    void createClassStudents(const string& fname);
 
 
     void orderByUCCode();

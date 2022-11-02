@@ -20,7 +20,7 @@ void ScheduleManager::readClassesFile(const string& fname){
     }
 }
 
-void ScheduleManager::readClassesPerUC(const string fname){
+void ScheduleManager::readClassesPerUC(const string& fname){
     string line;
     ifstream file(fname);
     getline(file, line);
@@ -76,6 +76,49 @@ void ScheduleManager::readStudentsFile(const string& fname){
     } else {
         cout << "Could not open the file" << endl;
     }
+}
+
+int hasClass(vector<ClassStudents> classes, string& codeUC, string& codeClass) {
+    int index = 0;
+    for (auto & classe : classes) {
+        if (classe.getCodeUC() == codeUC && classe.getCodeClass() == codeClass )
+            return index;
+        else {
+            index++;
+            continue;
+        }
+    }
+    return -1;
+}
+
+void ScheduleManager::createClassStudents(const string& fname) {
+    string line;
+    ifstream file(fname);
+    getline(file, line);
+    if (file.is_open()) {
+        string temp_string;
+        int id;
+        string codeUC;
+        string codeClass;
+        vector<int> students;
+        while (getline(file, line)) {
+            stringstream inputString(line);
+            getline(inputString, temp_string, ',');
+            id = stoi(temp_string);
+            getline(inputString, temp_string, ',');
+            getline(inputString, codeUC, ',');
+            getline(inputString, codeClass, ',');
+            int index = hasClass(classStudents, codeUC, codeClass);
+            if (index != -1) {
+                classStudents[index].addStudent(id);
+            } else {
+                students.push_back(id);
+                ClassStudents c1 = *new ClassStudents(codeUC, codeClass, students);
+                classStudents.push_back(c1);
+            }
+        }
+    } else
+        cout << "Could not open the file" << endl;
 }
 
 void ScheduleManager::receiveRequest(Request& request) {

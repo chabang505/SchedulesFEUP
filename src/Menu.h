@@ -9,7 +9,6 @@
 
 
 class Menu {
-    ScheduleManager manager = ScheduleManager();
 
 public:
 /*
@@ -18,7 +17,32 @@ public:
         listPronta = enviaPedidoParaScheduleManager;
         display(listPronta);
     }
+
+- apresentar mensagem inicial
+- apresentar opçoes iniciais:
+  1. consulta
+  2. fazer pedido
+  3. sair
+
+  Menu 1.
+  1. listar alunos de uma turma ou UC - metodo_X()
+  2.
+  3.
+  4.
+  ...
+
+  Codigo UC Codigo Turma
+  Slot (dia da semana, hora de inicio, duracao, tipo)
+  Slot
+
+ Dia da semana
+ Cod UC Cod turma
+ hora, duracao, tipo
+
+
 */
+
+
     // student request methods
     /**
      * Removes a student from a UC or class
@@ -52,6 +76,7 @@ public:
      */
     string changeStudentClasses(ScheduleManager& manager, Request& request);
 
+    Menu();
 };
 
 

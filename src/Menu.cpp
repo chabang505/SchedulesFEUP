@@ -4,6 +4,8 @@
 
 #include "Menu.h"
 
+Menu::Menu() = default;
+
 string Menu::removeStudent(ScheduleManager& manager, Request& request) {
     string reply = manager.removeStudent(request);
     return reply;
