@@ -17,7 +17,8 @@ using namespace std;
 class ScheduleManager {
     set<Student> students;
     queue<Request> requests;
-    vector<ClassSchedule> classes; //mudei pra vector, pra facilitar o sort
+    vector<ClassSchedule> classSchedules; //mudei pra vector, pra facilitar o sort
+    set<ClassUC> classUCs;
 
 
 public:
@@ -36,7 +37,7 @@ public:
      * Reads the CSV file containing information on the classes for each UC
      * @param file Name of the file to be read
      */
-    void readClassesPerUC(const string file);
+    void readClassesPerUC(string file);
 
     /**
      * Reads the CSV file containing information on the students
@@ -54,36 +55,35 @@ public:
     // - recolha de todos os dados necessarios para uma lista temporaria
     // - ordenar essa lista de acordo com o criterio do utilizador
 
+    void receiveRequest(Request& request);
+
     /**
      * Removes a student from a class or UC
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string removeStudent(Request request);
+    string removeStudent(Request& request);
 
     /**
      * Adds a student to a class or UC
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string addStudent(Request request);
+    string addStudent(Request& request);
 
     /**
      * Performs a switch in a student's schedule, either between UCs or between classes
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string changeStudentClass(Request request);
+    string changeStudentClass(Request& request);
 
     /**
      * Performs multiple changes in a student's schedule, either between UCs or between classes
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string changeStudentClasses(Request request);
-
-
-
+    string changeStudentClasses(Request& request);
 
 };
 

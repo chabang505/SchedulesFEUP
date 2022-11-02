@@ -76,6 +76,8 @@ public:
      */
     int getNumStudents();
 
+    bool operator <(const ClassUC& c2) const;
+
 
 };
 
