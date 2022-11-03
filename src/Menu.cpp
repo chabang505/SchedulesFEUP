@@ -66,6 +66,7 @@ list<string> Menu::listUCbyStudent (ScheduleManager& manager, Student& s){
     }
     return res;
 }
+
 list<string> Menu::listClassbyStudent (ScheduleManager& manager, Student& s){
     list<ClassUC> l= manager.listClassUCbyStudent(s);
     list<string> res;
@@ -73,4 +74,8 @@ list<string> Menu::listClassbyStudent (ScheduleManager& manager, Student& s){
         res.push_back(x.getCodeClass());
     }
     return res;
+}
+
+void Menu::ShowStudentSchedule (ScheduleManager& manager, Student& s){
+
 }
