@@ -186,6 +186,23 @@ string ScheduleManager::changeStudentClasses(Request& request) {
         // if possible make change requested
 
 }
+
+list<ClassUC> ScheduleManager::listClassUCbyStudent(Student &student) {
+    list<ClassUC> l1=student.getClasses();
+    return l1;
+
+}
+
+list<ClassSchedule> ScheduleManager::getStudentSchedule(Student &student) {
+    list<ClassUC> l = student.getClasses();
+    list<ClassSchedule> res;
+    for (ClassUC uc: l) {
+        for (ClassSchedule cs: classSchedules) {
+            if (uc.getCodeClass()==cs.getCodeClass() && uc.getCodeUC()==cs.getCodeUC()) res.push_back(cs);
+        }
+    }
+    return res;
+}
 /*
 bool ScheduleManager::sortUCCode(ClassSchedule a, ClassSchedule b) {
     return(a.getCodeUC()<b.getCodeUC());
