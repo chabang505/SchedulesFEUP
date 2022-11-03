@@ -76,7 +76,34 @@ public:
      */
     string changeStudentClasses(ScheduleManager& manager, Request& request);
 
+    /**
+     * Creates a list of the ClassUC'S of the classes student s is enrolled in
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param request Reference to the Student object we want to obtain the information about
+     * @return List of the ClassUC's
+     */
+
+
+    list<ClassUC> listClassUCbyStudent (ScheduleManager& manager, Student& s);
+    /**
+     * Creates a list of the the uc codes of the classes student s is enrolled in
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param s Reference to the Student object we want to obtain the information about
+     * @return List of the UCCodes
+     */
+    list<string> listUCbyStudent(ScheduleManager &manager, Student &s);
+
+    /**
+     * Creates a list of the the class codes of the classes student s is enrolled in
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param s Reference to the Student object we want to obtain the information about
+     * @return List of the ClassCodes
+     */
+    list<string> listClassbyStudent(ScheduleManager &manager, Student &s);
+
     Menu();
+
+    void ShowStudentSchedule(ScheduleManager &manager, Student &s);
 };
 
 

@@ -142,6 +142,20 @@ public:
      */
     string changeStudentClasses(Request& request);
 
+    /**
+     * Creates a list of the ClassUC's of the classes that the given Student object is enrolled in
+     * @param student Reference to the student we want to obtain information about
+     * @return a list of the ClassUC's
+     */
+
+    list<ClassUC> listClassUCbyStudent(Student &student);
+
+    /**
+     * Creates a list of the ClassSchedules of the ClassUc's that the given Student object is enrolled in
+     * @param student Reference to the student we want to obtain information about
+     * @return a list of the ClassSchedule's
+     */
+    list<ClassSchedule> getStudentSchedule(Student &student);
 };
 
 
