@@ -17,7 +17,7 @@ class Slot {
 
     int weekDay;
     float start;
-    float end;
+    float duration;
     string type;
 
 public:
@@ -25,10 +25,10 @@ public:
      * Creates a new Slot object
      * @param wd The day of the week
      * @param s The start time of the slot, as a float
-     * @param e The end time of the slot, as a float
+     * @param d The duration of the slot, as a float
      * @param t The type of the slot
      */
-    Slot(int wd, float s, float e, string t);
+    Slot(int wd, float s, float d, string t);
 
     /**
      * Creates a new Slot object
@@ -53,12 +53,48 @@ public:
      * @return The start time of the Slot
      */
     float getStart();
+
+    /**
+     * Assigns a new start hour to the Slot object
+     * @param newStart New start hour to be assigned
+     */
     void setStart(float newStart);
-    float getEnd();
-    void setEnd(float newEnd);
+
+    /**
+     * Returns the duration of the slot
+     * @return Duration of the slot
+     */
+    float getDuration();
+
+    /**
+     * Assigns a new duration to the Slot object
+     * @param newDuration New duration to be assigned
+     */
+    void setDuration(float newDuration);
+
+    /**
+     * Returns the type of the Slot object
+     * @return Type of the Slot object
+     */
     string getType();
+
+    /**
+     * Assigns a new type to the Slot object
+     * @param newType New type to be assigned
+     */
     void setType(string newType);
+
+    /**
+     * Equality operator for Slot objects
+     * @param s2 Reference to another Slot object
+     * @return True if Slot objects are equal, false otherwise
+     */
     bool operator==(const Slot& s2) const;
+
+    /**
+     * Converts Slot object into string to display it in the terminal
+     * @return Slot object as a string
+     */
     string write() const;
 
 };

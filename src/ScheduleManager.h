@@ -147,7 +147,6 @@ public:
      * @param student Reference to the student we want to obtain information about
      * @return a list of the ClassUC's
      */
-
     list<ClassUC> listClassUCbyStudent(Student &student);
 
     /**

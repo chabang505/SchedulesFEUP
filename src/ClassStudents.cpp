@@ -4,7 +4,9 @@
 
 #include "ClassStudents.h"
 
-ClassStudents::ClassStudents(string cuc, string cc, vector<int> s): codeUC(cuc), codeClass(cc), students(s) {}
+#include <utility>
+
+ClassStudents::ClassStudents(string  cuc, string  cc, const vector<int> & s): codeUC(std::move(cuc)), codeClass(std::move(cc)), students(s) {}
 
 ClassStudents::ClassStudents(const ClassStudents& c1) {
     this->codeUC = c1.codeUC;
@@ -16,7 +18,7 @@ string ClassStudents::getCodeUC() {
     return this->codeUC;
 }
 
-void ClassStudents::setCodeUC(const std::string newCodeUC) {
+void ClassStudents::setCodeUC(const string& newCodeUC) {
     this->codeUC = newCodeUC;
 }
 
@@ -24,10 +26,10 @@ string ClassStudents::getCodeClass() {
     return this->codeClass;
 }
 
-void ClassStudents::setCodeClass(const std::string newCodeClass) {
+void ClassStudents::setCodeClass(const string& newCodeClass) {
     this->codeClass = newCodeClass;
 }
 
-void ClassStudents::addStudent(int student) {
+void ClassStudents::addStudent(const int student) {
     this->students.push_back(student);
 }

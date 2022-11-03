@@ -76,8 +76,12 @@ public:
      */
     int getNumStudents();
 
+    /**
+     * Less operator for ClassUC objects
+     * @param c2 Reference to another ClassUC object
+     * @return True if this ClassUC is less than the one compared, false otherwise
+     */
     bool operator <(const ClassUC& c2) const;
-
 
 };
 

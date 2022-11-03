@@ -21,9 +21,9 @@ float Slot::getStart() { return this->start; }
 
 void Slot::setStart(float newStart) { this->start = newStart; }
 
-float Slot::getEnd() { return this->end; }
+float Slot::getDuration() { return this->duration; }
 
-void Slot::setEnd(float newEnd) { this->end = newEnd; }
+void Slot::setDuration(float newDuration) { this->duration = newDuration; }
 
 string Slot::getType() { return this->type; }
 
@@ -32,7 +32,7 @@ void Slot::setType(string newType) { this->type = newType; }
 bool Slot::operator==(const Slot &s2) const {
     return (this->weekDay == s2.weekDay &&
             this->start == s2.start &&
-            this->end == s2.end &&
+            this->duration == s2.duration &&
             this->type == s2.type);
 }
 
@@ -40,28 +40,28 @@ string Slot::write() const {
     stringstream oss;
     string dayOfTheWeek = "";
     switch (weekDay) {
-        case 1:
+        case 0:
             dayOfTheWeek = "Sun";
             break;
-        case 2:
+        case 1:
             dayOfTheWeek = "Mon";
             break;
-        case 3:
+        case 2:
             dayOfTheWeek = "Tue";
             break;
-        case 4:
+        case 3:
             dayOfTheWeek = "Wed";
             break;
-        case 5:
+        case 4:
             dayOfTheWeek = "Thu";
             break;
-        case 6:
+        case 5:
             dayOfTheWeek = "Fri";
             break;
-        case 7:
+        case 6:
             dayOfTheWeek = "Sat";
             break;
     }
-    oss << dayOfTheWeek << "\n" << start << "\n" << end << "\n" << type;
+    oss << dayOfTheWeek << "\n" << start << "\n" << duration << "\n" << type;
     return oss.str();
 }

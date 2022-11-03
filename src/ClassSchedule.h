@@ -21,6 +21,7 @@ class ClassSchedule {
     list<Slot> slots;
 
 public:
+
     /**
      * Creates a new ClassSchedule object
      * @param cuc The internal code of the UC
