@@ -24,7 +24,12 @@ public:
     // adicionar aluno a turma/UC
     // alterar turma/UC de aluno
     // alterar várias turmas/UC de aluno
-
+    Request(string t, string s, list<ClassUC> cc, list<ClassUC> rc);
+    Request(const Request& r1);
+    string getType();
+    string getStudent();
+    list<ClassUC> getCurrentClasses();
+    list<ClassUC> getRequestedClasses();
 
 };
 
