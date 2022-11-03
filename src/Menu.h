@@ -102,6 +102,8 @@ public:
     list<string> listClassbyStudent(ScheduleManager &manager, Student &s);
 
     Menu();
+
+    void ShowStudentSchedule(ScheduleManager &manager, Student &s);
 };
 
 

@@ -77,5 +77,12 @@ list<string> Menu::listClassbyStudent (ScheduleManager& manager, Student& s){
 }
 
 void Menu::ShowStudentSchedule (ScheduleManager& manager, Student& s){
+    list<ClassSchedule> l = manager.getStudentSchedule(s);
+    for (ClassSchedule cs: l) {
+        cout<<"UC:"<<cs.getCodeUC()<<" Turma:"<<cs.getCodeClass()<<"\n";
+        for (Slot h: cs.getSlots()){
+            cout<<h.getType()<<"->"<<h.getWeekDay()<<": "<<h.getStart()<<"-"<<h.getEnd()<<"\n";
+        }
+    }
 
 }
