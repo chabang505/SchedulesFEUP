@@ -76,7 +76,13 @@ public:
      */
     string changeStudentClasses(ScheduleManager& manager, Request& request);
 
+    list<ClassUC> listClassUCbyStudent (ScheduleManager& manager, Student& s);
+
     Menu();
+
+    list<string> listUCbyStudent(ScheduleManager &manager, Student &s);
+
+    list<string> listClassbyStudent(ScheduleManager &manager, Student &s);
 };
 
 

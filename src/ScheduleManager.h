@@ -12,6 +12,7 @@
 #include "Student.h"
 #include "ClassSchedule.h"
 #include "ClassStudents.h"
+#include "Year.h"
 
 using namespace std;
 
@@ -102,6 +103,9 @@ public:
      */
     string changeStudentClasses(Request& request);
 
+
+
+    list<ClassUC> listClassUCbyStudent(Student &student);
 };
 
 

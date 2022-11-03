@@ -18,6 +18,17 @@ Menu::Menu() {
     cout<<"3.Quit\n";
     int n;
     cin>>n;
+    switch(n) {
+        case 1:
+            // code block
+            break;
+        case 2:
+            cout<<"";
+            break;
+        case 3:
+            cout<<"You have successfully exited your Schedule Manager!";
+            break;
+    }
 
 
 
@@ -41,4 +52,25 @@ string Menu::changeStudentClass(ScheduleManager& manager, Request& request) {
 string Menu::changeStudentClasses(ScheduleManager& manager, Request& request) {
     string reply = manager.changeStudentClasses(request);
     return reply;
+}
+
+list<ClassUC> Menu::listClassUCbyStudent (ScheduleManager& manager, Student& s){
+    list<ClassUC> res= manager.listClassUCbyStudent(s);
+    return res;
+}
+list<string> Menu::listUCbyStudent (ScheduleManager& manager, Student& s){
+    list<ClassUC> l= manager.listClassUCbyStudent(s);
+    list<string> res;
+    for(auto x: l){
+        res.push_back(x.getCodeUC());
+    }
+    return res;
+}
+list<string> Menu::listClassbyStudent (ScheduleManager& manager, Student& s){
+    list<ClassUC> l= manager.listClassUCbyStudent(s);
+    list<string> res;
+    for(auto x: l){
+        res.push_back(x.getCodeClass());
+    }
+    return res;
 }
