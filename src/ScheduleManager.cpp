@@ -9,8 +9,58 @@
 
 ScheduleManager::ScheduleManager() = default;
 
+int wdtoi(const string& weekDay) {
+    vector<string> wds{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    for (int i = 0; i < wds.size(); i++) {
+        if (weekDay == wds[i]) {
+            return i;
+        }
+    }
+}
+
+int ScheduleManager::classScheduleExists(const string &codeClass, const string &codeUC) {
+    int index = 0;
+    for (ClassSchedule c: ScheduleManager::classSchedules) {
+        if (c.getCodeClass() == codeClass && c.getCodeUC() == codeUC)
+            return index;
+        index++;
+    }
+    return -1;
+}
+
 void ScheduleManager::readClassesFile(const string& fname){
-    
+    string line;
+    ifstream file(fname);
+    if (file.is_open()) {
+        getline(file, line);
+        string codeClass, codeUC, previousClass, previousUC, type, temp_string;
+        int weekDay;
+        float startHour, duration;
+        list<Slot> slots;
+        while (getline(file, line)) {
+            stringstream inputString(line);
+            getline(inputString, codeClass, ',');
+            getline(inputString, codeUC, ',');
+            getline(inputString, temp_string, ',');
+            weekDay = wdtoi(temp_string);
+            getline(inputString, temp_string, ',');
+            startHour = stof(temp_string);
+            getline(inputString, temp_string, ',');
+            duration = stof(temp_string);
+            getline(inputString, type, ',');
+            Slot slot = Slot(weekDay, startHour, duration, type);
+            int index = classScheduleExists(codeClass, codeUC);
+            if (index != -1) {
+                classSchedules[index].addSlot(slot);
+            } else {
+                slots.push_back(slot);
+                ClassSchedule cs = ClassSchedule(codeUC, codeClass, slots);
+                slots.clear();
+                classSchedules.push_back(cs);
+            }
+        }
+    } else
+        cout << "Could not open the file" << endl;
 }
 
 void ScheduleManager::readClassesPerUC(const string& fname){
