@@ -6,6 +6,7 @@
 #include "src/Menu.h"
 
 int main(int argc, char* argv[]) {
+    Menu m();
     ScheduleManager manager = ScheduleManager();
     manager.createClassStudents("students_classes.csv");
 }
