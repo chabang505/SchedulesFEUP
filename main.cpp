@@ -6,5 +6,5 @@
 
 int main(int argc, char* argv[]) {
     ScheduleManager manager = ScheduleManager();
-    manager.readStudentsFile("students_classes.csv");
+    manager.readClassesFile("classes.csv");
 }

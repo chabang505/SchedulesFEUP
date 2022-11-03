@@ -19,15 +19,16 @@ class ScheduleManager {
     set<Student> students;
     list<ClassStudents> classStudents;
     queue<Request> requests;
-    vector<ClassSchedule> classSchedules; //mudei pra vector, pra facilitar o sort
+    vector<ClassSchedule> classSchedules;
     set<ClassUC> classUCs;
-
 
 public:
     /**
      * Creates a new ScheduleManager object
      */
     ScheduleManager();
+
+    int classScheduleExists(const string& codeClass, const string& codeUC);
 
     /**
      * Reads the CSV file containing information on the classes
