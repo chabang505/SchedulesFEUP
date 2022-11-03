@@ -12,6 +12,7 @@
 #include "Student.h"
 #include "ClassSchedule.h"
 #include "ClassStudents.h"
+#include "Year.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ class ScheduleManager {
     queue<Request> requests;
     vector<ClassSchedule> classSchedules;
     set<ClassUC> classUCs;
+    list<Year> years;
 
 public:
     /**
@@ -28,7 +30,40 @@ public:
      */
     ScheduleManager();
 
+    /**
+     * Checks if the schedule of a class already exists in the system
+     * @param codeClass Code of the class
+     * @param codeUC Code of the UC
+     * @return Index of the ClassSchedule object in the system, if it exists, -1 otherwise
+     */
     int classScheduleExists(const string& codeClass, const string& codeUC);
+
+    /**
+     * Finds what year a certain class belongs to
+     * @param codeClass Code of the class
+     * @return Integer corresponding to the year of the class
+     */
+    int findYear(const string& codeClass);
+
+    /**
+     * Initializes the list of UCs by year
+     */
+    void generateYears();
+
+    /**
+     * Enters the information from a certain class and UC into the list of UCs by year
+     * @param codeUC Code of the UC
+     * @param codeClass Code of the class
+     */
+    void fillYearsList(const string& codeUC, const string& codeClass);
+
+    /**
+     * Places a student in all the classes he is enrolled in at the start of the system
+     * @param id ID of the student
+     * @param name Name of the student
+     * @param classes List of ClassUCs corresponding to the students information
+     */
+    void placeStudentInYears(int id, const string& name, const list<ClassUC> & classes);
 
     /**
      * Reads the CSV file containing information on the classes
@@ -55,7 +90,7 @@ public:
      * @param codeClass String with the code of the class
      * @return Index of the element, if found, -1 otherwise
      */
-    int hasClass(vector<ClassStudents> classes, string& codeUC, string& codeClass);
+    int hasClass(vector<ClassStudents> classes, const string& codeUC, const string& codeClass);
 
     /**
      * Reads students CSV file to create vector of ClassStudents
@@ -73,6 +108,10 @@ public:
     // - recolha de todos os dados necessarios para uma lista temporaria
     // - ordenar essa lista de acordo com o criterio do utilizador
 
+    /**
+     * Receives the request and places it on a queue, to guarantee they are ordered and handled by time of arrival
+     * @param request The request to be handled in the system
+     */
     void receiveRequest(Request& request);
 
     /**

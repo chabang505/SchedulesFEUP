@@ -4,7 +4,9 @@
 
 #include "UC.h"
 
-UC::UC(std::string c, list<Turma> t): code(c), turmas(t) {}
+UC::UC(string c): code(c) {}
+
+UC::UC(string c, list<Turma> t): code(c), turmas(t) {}
 
 UC::UC(const UC &uc1) {
     this->code = uc1.code;
@@ -17,6 +19,14 @@ string UC::getCode() {
 
 list<Turma> UC::getTurmas() {
     return this->turmas;
+}
+
+list<Turma>::iterator UC::findTurma(const string &codeClass) {
+    for (auto it = this->turmas.begin(); it != this->turmas.end(); it++) {
+        if ((*it).getCode() == codeClass)
+            return it;
+    }
+    return this->turmas.end();
 }
 
 void UC::addTurma(const Turma &turma) {

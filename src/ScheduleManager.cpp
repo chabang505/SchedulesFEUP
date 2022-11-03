@@ -28,6 +28,54 @@ int ScheduleManager::classScheduleExists(const string &codeClass, const string &
     return -1;
 }
 
+int ScheduleManager::findYear(const string& codeClass) {
+    int year = codeClass[0] - '0';
+    return year;
+}
+
+void ScheduleManager::generateYears() {
+    Year y1 = Year(1);
+    Year y2 = Year(2);
+    Year y3 = Year(3);
+    years.push_back(y1);
+    years.push_back(y2);
+    years.push_back(y3);
+}
+
+
+void ScheduleManager::fillYearsList(const string& codeUC, const string& codeClass) {
+    int yearNumber = findYear(codeClass);
+    for (auto & year : years) {
+        if (year.getNumber() == yearNumber) {
+            auto it = year.findUC(codeUC);
+            if (it != year.end()){
+                Turma t1 = Turma(codeClass);
+                it->addTurma(t1);
+            } else {
+                Turma t1 = Turma(codeClass);
+                UC uc1 = UC(codeUC);
+                uc1.addTurma(t1);
+                year.addUC(uc1);
+            }
+        }
+    }
+}
+
+void ScheduleManager::placeStudentInYears(int id, const string& name, const list<ClassUC> & classes) {
+    StudentCard student = StudentCard(id, name);
+    for (ClassUC classUC: classes) {
+        int yearNumber = findYear(classUC.getCodeClass());
+        for (auto & year: years) {
+            if (year.getNumber() == yearNumber) {
+               auto uc = year.findUC(classUC.getCodeUC());
+               auto turma = uc->findTurma(classUC.getCodeClass());
+               turma->addStudent(student);
+            }
+        }
+    }
+
+}
+
 void ScheduleManager::readClassesFile(const string& fname){
     string line;
     ifstream file(fname);
@@ -75,6 +123,7 @@ void ScheduleManager::readClassesPerUC(const string& fname){
             getline(inputString, codeClass, ',');
             ClassUC c1 = ClassUC(codeUC, codeClass);
             classUCs.insert(c1);
+            fillYearsList(codeUC, codeClass);
         }
     } else
         cout << "Could not open the file" << endl;
@@ -101,6 +150,7 @@ void ScheduleManager::readStudentsFile(const string& fname){
             } else if (previous_id != current_id) {
                 Student s1 = Student(previous_id, name, classes);
                 students.insert(s1);
+                placeStudentInYears(previous_id, name, classes);
                 classes.clear();
                 getline(inputString, name, ',');
             }
@@ -115,7 +165,7 @@ void ScheduleManager::readStudentsFile(const string& fname){
     }
 }
 
-int hasClass(vector<ClassStudents> classes, string& codeUC, string& codeClass) {
+int ScheduleManager::hasClass(vector<ClassStudents> classes, const string& codeUC, const string& codeClass) {
     int index = 0;
     for (auto & classe : classes) {
         if (classe.getCodeUC() == codeUC && classe.getCodeClass() == codeClass )

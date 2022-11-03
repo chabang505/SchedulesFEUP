@@ -4,6 +4,8 @@
 
 #include "Turma.h"
 
+Turma::Turma(string c): code(c) {}
+
 Turma::Turma(std::string c, list<StudentCard> s): code(c), students(s) {}
 
 Turma::Turma(const Turma &t1) {

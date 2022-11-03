@@ -4,6 +4,8 @@
 
 #include "Year.h"
 
+Year::Year(int n): number(n) {}
+
 Year::Year(int n, list<UC> ucs): number(n), ucs(ucs) {}
 
 Year::Year(const Year& y1) {
@@ -17,6 +19,18 @@ int Year::getNumber() {
 
 list<UC> Year::getUCs() {
     return this->ucs;
+}
+
+list<UC>::iterator Year::end() {
+    return ucs.end();
+}
+
+list<UC>::iterator Year::findUC(const string& codeUC) {
+    for (auto it = this->ucs.begin(); it != this->ucs.end(); it++) {
+        if ((*it).getCode() == codeUC)
+            return it;
+    }
+    return this->ucs.end();
 }
 
 void Year::addUC(const UC &uc) {
