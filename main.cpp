@@ -15,4 +15,3 @@ int main(int argc, char* argv[]) {
     manager.readClassesPerUC("CSV/classes_per_uc.csv");
     manager.readStudentsFile("CSV/students_classes.csv");
 }
-
