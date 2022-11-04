@@ -242,14 +242,16 @@ string ScheduleManager::changeStudentClasses(Request& request) {
 
 }
 
-list<ClassUC> ScheduleManager::listClassUCbyStudent(Student &student) {
-    list<ClassUC> l1=student.getClasses();
+list<ClassUC> ScheduleManager::listClassUCbyStudent(int studentid) {
+    auto it= findStudent(studentid);
+    list<ClassUC> l1 = (*it).getClasses();
     return l1;
 
 }
 
-list<ClassSchedule> ScheduleManager::getStudentSchedule(Student &student) {
-    list<ClassUC> l = student.getClasses();
+list<ClassSchedule> ScheduleManager::getStudentSchedule(int studentid) {
+    auto it= findStudent(studentid);
+    list<ClassUC> l = (*it).getClasses();
     list<ClassSchedule> res;
     for (ClassUC uc: l) {
         for (ClassSchedule cs: classSchedules) {

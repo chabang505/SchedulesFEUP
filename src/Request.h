@@ -13,7 +13,7 @@
 using namespace std;
 
 class Request {
-    Request(int t, int id, list<ClassUC> &cc, list<ClassUC> &rc);
+
 
     int type;
     int studentID;
@@ -33,12 +33,13 @@ public:
      * @param cc List of the classes the student wants to change
      * @param rc List of the classes the student wants to start attending
      */
-    Request(string t, int id, list<ClassUC> & cc, list<ClassUC> & rc);
 
     /**
      * Creates a new Request object
      * @param r1 Reference to an existing Request object
      */
+    Request(int t, int id, list<ClassUC> &cc, list<ClassUC> &rc);
+    Request(int t, int id, list<ClassUC> &cc);
     Request(const Request& r1);
 
     /**
