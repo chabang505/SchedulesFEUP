@@ -11,26 +11,26 @@ ClassUC::ClassUC(const ClassUC& c1) {
     this->numStudents = 0;
 }
 
-string ClassUC::getCodeUC() { return this->codeUC; }
+string ClassUC::getCodeUC() const { return this->codeUC; }
 
 void ClassUC::setCodeUC(string newCodeUC) { this->codeUC = newCodeUC; }
 
-string ClassUC::getCodeClass() { return this->codeClass; }
+string ClassUC::getCodeClass() const { return this->codeClass; }
 
 void ClassUC::setCodeClass(string newCodeClass) { this->codeClass = newCodeClass; }
-
-bool ClassUC::operator==(const ClassUC &c2) const {
-    return (this->codeUC == c2.codeUC && this->codeClass == c2.codeClass);
-}
-
-int ClassUC::getNumStudents(){
-    return numStudents;
-}
 
 string ClassUC::write() const {
     stringstream oss;
     oss << codeUC << "\n" << codeClass;
     return oss.str();
+}
+
+int ClassUC::getNumStudents() const{
+    return numStudents;
+}
+
+bool ClassUC::operator==(const ClassUC &c2) const {
+    return (this->codeUC == c2.codeUC && this->codeClass == c2.codeClass);
 }
 
 bool ClassUC::operator< (const ClassUC& c2) const {

@@ -35,7 +35,7 @@ public:
      * Returns the code of the UC of the ClassStudents object
      * @return Code of the UC of the ClassStudents object
      */
-    string getCodeUC();
+    string getCodeUC() const;
 
     /**
      * Assigns a new UC code to the ClassStudents object
@@ -47,7 +47,7 @@ public:
      * Returns the code of the class of the ClassStudents object
      * @return Code of the class of the ClassStudents object
      */
-    string getCodeClass();
+    string getCodeClass() const;
 
     /**
      * Assigns a new class code to the ClassStudents object

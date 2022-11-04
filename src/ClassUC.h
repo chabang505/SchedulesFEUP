@@ -37,7 +37,7 @@ public:
      * Returns the UC code for this ClassUC
      * @return The UC code for this ClassUC
      */
-    string getCodeUC();
+    string getCodeUC() const;
 
     /**
      * Assigns a new UC code to the ClassUC object
@@ -49,20 +49,13 @@ public:
      * Returns the class code for this ClassUC
      * @return The class code for this ClassUC
      */
-    string getCodeClass();
+    string getCodeClass() const;
 
     /**
      * Assigns a new class code to the ClassUC object
      * @param newCodeClass The new class code to assign
      */
     void setCodeClass(string newCodeClass);
-
-    /**
-     * Evaluates the equality between this ClassUC and another ClassUC object
-     * @param c2 Reference to the ClassUC object to be compared
-     * @return True if the objects are equal, false if they are different
-     */
-    bool operator==(const ClassUC& c2) const;
 
     /**
      * Transforms the object into a printable string
@@ -74,7 +67,14 @@ public:
      * Returns the number of students currently on this class
      * @return The number of students currently on this class
      */
-    int getNumStudents();
+    int getNumStudents() const;
+
+    /**
+     * Evaluates the equality between this ClassUC and another ClassUC object
+     * @param c2 Reference to the ClassUC object to be compared
+     * @return True if the objects are equal, false if they are different
+     */
+    bool operator==(const ClassUC& c2) const;
 
     /**
      * Less operator for ClassUC objects

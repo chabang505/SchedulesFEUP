@@ -40,7 +40,7 @@ public:
      * Returns the weekday of the Slot
      * @return The weekday of the Slot
      */
-    int getWeekDay();
+    int getWeekDay() const;
 
     /**
      * Assigns a new weekday to the Slot object
@@ -52,7 +52,7 @@ public:
      * Returns the start time of the Slot
      * @return The start time of the Slot
      */
-    float getStart();
+    float getStart() const;
 
     /**
      * Assigns a new start hour to the Slot object
@@ -64,7 +64,7 @@ public:
      * Returns the duration of the slot
      * @return Duration of the slot
      */
-    float getDuration();
+    float getDuration() const;
 
     /**
      * Assigns a new duration to the Slot object
@@ -76,13 +76,13 @@ public:
      * Returns the type of the Slot object
      * @return Type of the Slot object
      */
-    string getType();
+    string getType() const;
 
     /**
      * Assigns a new type to the Slot object
      * @param newType New type to be assigned
      */
-    void setType(string newType);
+    void setType(const string& newType);
 
     /**
      * Equality operator for Slot objects

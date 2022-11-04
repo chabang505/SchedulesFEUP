@@ -29,7 +29,7 @@ public:
      * @param c String containing code of the Turma
      * @param s List of StudentCards belonging to the Turma
      */
-    Turma(string c, list<StudentCard> s);
+    Turma(string c, list<StudentCard> & s);
 
     /**
      * Creates a new Turma object
@@ -41,13 +41,13 @@ public:
      * Returns the code of this Turma object
      * @return Code of this Turma object
      */
-    string getCode();
+    string getCode() const;
 
     /**
      * Returns the list of StudentCards on this Turma object
      * @return List of StudentCards on this Turma object
      */
-    list<StudentCard> getStudents();
+    list<StudentCard> getStudents() const;
 
     /**
      * Adds a StudentCard to the Turma

@@ -4,30 +4,30 @@
 
 #include "Slot.h"
 
-Slot::Slot(int wd, float s, float e, string t): weekDay(wd), start(s), end(e), type(t) {}
+Slot::Slot(int wd, float s, float d, string t): weekDay(wd), start(s), duration(d), type(std::move(t)) {}
 
 Slot::Slot(const Slot& s1) {
     this->weekDay = s1.weekDay;
     this->start = s1.start;
-    this->end = s1.end;
+    this->duration = s1.duration;
     this->type = s1.type;
 }
 
-int Slot::getWeekDay() { return this->weekDay; }
+int Slot::getWeekDay() const { return this->weekDay; }
 
 void Slot::setWeekDay(int newWeekDay) { this->weekDay = newWeekDay; }
 
-float Slot::getStart() { return this->start; }
+float Slot::getStart() const { return this->start; }
 
 void Slot::setStart(float newStart) { this->start = newStart; }
 
-float Slot::getDuration() { return this->duration; }
+float Slot::getDuration() const { return this->duration; }
 
 void Slot::setDuration(float newDuration) { this->duration = newDuration; }
 
-string Slot::getType() { return this->type; }
+string Slot::getType() const { return this->type; }
 
-void Slot::setType(string newType) { this->type = newType; }
+void Slot::setType(const string& newType) { this->type = newType; }
 
 bool Slot::operator==(const Slot &s2) const {
     return (this->weekDay == s2.weekDay &&

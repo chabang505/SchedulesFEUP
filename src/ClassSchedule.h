@@ -28,7 +28,7 @@ public:
      * @param cc The internal code of the class
      * @param s A list of the slots belonging to the class
      */
-    ClassSchedule(string cuc, string cc, list<Slot> s);
+    ClassSchedule(string cuc, string cc, list<Slot> & s);
 
     /**
      * Creates a new ClassSchedule object
@@ -40,7 +40,7 @@ public:
      * Returns the code of the UC
      * @return The code of the UC
      */
-    string getCodeUC();
+    string getCodeUC() const;
 
     /**
      * Assigns a new UC code to this ClassSchedule
@@ -52,7 +52,7 @@ public:
      * Returns the code of the class
      * @return The code of the class
      */
-    string getCodeClass();
+    string getCodeClass() const;
 
     /**
      * Assigns a new class code to this ClassSchedule
@@ -64,7 +64,7 @@ public:
      * Returns the list of slots belonging to the class
      * @return The list of slots belonging to the class
      */
-    list<Slot> getSlots();
+    list<Slot> getSlots() const;
 
     /**
      * Assigns a new list of slots to this ClassSchedule
@@ -82,7 +82,7 @@ public:
      * Returns the number of slots of this ClassSchedule
      * @return The number of slots of this ClassSchedule
      */
-    int numOfSlots();
+    int numOfSlots() const;
 
 };
 

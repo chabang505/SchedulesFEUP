@@ -28,7 +28,7 @@ public:
      * @param c String with the code of the object
      * @param t List of Turmas belonging to that UC
      */
-    UC(string c, list<Turma> t);
+    UC(string c, list<Turma> & t);
 
     /**
      * Creates a new UC object
@@ -40,13 +40,13 @@ public:
      * Returns the code for the UC object
      * @return Code for the UC object
      */
-    string getCode();
+    string getCode() const;
 
     /**
      * Returns the list of Turmas on this UC object
      * @return List of Turmas on this UC object
      */
-    list<Turma> getTurmas();
+    list<Turma> getTurmas() const;
 
     /**
      * Gives an iterator to a Turma within the UC object

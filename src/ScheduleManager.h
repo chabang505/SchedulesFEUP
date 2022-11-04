@@ -108,6 +108,8 @@ public:
     // - recolha de todos os dados necessarios para uma lista temporaria
     // - ordenar essa lista de acordo com o criterio do utilizador
 
+    set<Student>::iterator findStudent(int id);
+
     /**
      * Receives the request and places it on a queue, to guarantee they are ordered and handled by time of arrival
      * @param request The request to be handled in the system

@@ -4,22 +4,26 @@
 
 #include "ClassSchedule.h"
 
-ClassSchedule::ClassSchedule(string cuc, string cc, list<Slot> s): codeUC(cuc), codeClass(cc), slots(s) {}
+#include <utility>
+
+ClassSchedule::ClassSchedule(string cuc, string cc, list<Slot> & s):
+    codeUC(move(cuc)), codeClass(move(cc)), slots(s) {}
+
 ClassSchedule::ClassSchedule(const ClassSchedule &cs1) {
     this->codeUC = cs1.codeUC;
     this->codeClass = cs1.codeClass;
     this->slots = cs1.slots;
 }
 
-string ClassSchedule::getCodeUC() { return this->codeUC; }
+string ClassSchedule::getCodeUC() const { return this->codeUC; }
 
 void ClassSchedule::setCodeUC(string newCodeUC) { this->codeUC = newCodeUC; }
 
-string ClassSchedule::getCodeClass() { return this->codeClass; }
+string ClassSchedule::getCodeClass() const { return this->codeClass; }
 
 void ClassSchedule::setCodeClass(string newCodeClass) { this->codeClass = newCodeClass; }
 
-list<Slot> ClassSchedule::getSlots() { return slots; }
+list<Slot> ClassSchedule::getSlots() const { return slots; }
 
 void ClassSchedule::setSlots(const list<Slot> &newSlots) { this->slots = newSlots; }
 
@@ -27,4 +31,4 @@ void ClassSchedule::addSlot(Slot &s1) {
     slots.push_back(s1);
 }
 
-int ClassSchedule::numOfSlots() { return slots.size(); }
+int ClassSchedule::numOfSlots() const { return slots.size(); }

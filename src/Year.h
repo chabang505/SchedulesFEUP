@@ -20,14 +20,14 @@ public:
      * Creates a new Year object
      * @param n Number of the Year object
      */
-    Year(int n);
+    explicit Year(int n);
 
     /**
      * Creates a new Year object
      * @param n Number of the Year object
      * @param ucs List of the UCs that belong to that Year
      */
-    Year(int n, list<UC> ucs);
+    Year(int n, list<UC> & ucs);
 
     /**
      * Creates a new Year object
@@ -39,13 +39,13 @@ public:
      * Returns number of the Year object
      * @return Number of the Year object
      */
-    int getNumber();
+    int getNumber() const;
 
     /**
      * Returns list of the UCs belonging to the Year object
      * @return List of the UCs belonging to the Year object
      */
-    list<UC> getUCs();
+    list<UC> getUCs() const;
 
     /**
      * Returns an iterator to the end of the UC list

@@ -208,6 +208,11 @@ void ScheduleManager::createClassStudents(const string& fname) {
         cout << "Could not open the file" << endl;
 }
 
+set<Student>::iterator ScheduleManager::findStudent(const int id) {
+    Student s = Student(id);
+    return students.find(s);
+}
+
 void ScheduleManager::receiveRequest(Request& request) {
     this->requests.push(request);
 }

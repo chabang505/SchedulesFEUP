@@ -27,7 +27,13 @@ public:
      * @param n Name of the student
      * @param c List of ClassUC the student is enrolled in
      */
-    Student(int id, string n, list<ClassUC> c);
+    Student(int id, string n, list<ClassUC> & c);
+
+    /**
+     * Creates a new student object
+     * @param id Internal ID of the student
+     */
+    explicit Student(int id);
 
     /**
      * Creates a new Student object
@@ -39,7 +45,7 @@ public:
      * Returns the internal ID of the student
      * @return The internal ID of the student
      */
-    int getId();
+    int getId() const;
 
     /**
      * Assigns a new internal ID to the student
@@ -51,27 +57,33 @@ public:
      * Returns the name of the student
      * @return The name of the student
      */
-    string getName();
+    string getName() const;
 
     /**
      * Assigns a new name to the Student
      * @param newName The new name to assign
      */
-    void setName(string newName);
+    void setName(const string& newName);
 
     /**
      * Returns a list of the ClassUCs the student is enrolled in
      * @return List of the ClassUCs the student is enrolled in
      */
-    list<ClassUC> getClasses();
-
+    list<ClassUC> getClasses() const;
 
     /**
-     * Gives Student object a comparison method
+     * Less operator for Student objects
      * @param s2 Reference to another student object
      * @return True if compared Student is less than s2, false otherwise
      */
     bool operator <(const Student& s2) const;
+
+    /**
+     * Equality operator for student objects
+     * @param s2 Reference to another student object
+     * @return True if compared Students are equal, false otherwise
+     */
+    bool operator ==(const Student& s2) const;
 
     /**
      * Adds a new class to the Student's list of classes

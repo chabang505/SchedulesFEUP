@@ -7,17 +7,18 @@
 using namespace std;
 
 Menu::Menu() {
-    cout<<"=================================\n";
-    cout<<"Welcome to your Schedule Manager!\n";
-    cout<<"=================================\n\n";
+    cout << "=================================\n";
+    cout << "Welcome to your Schedule Manager!\n";
+    cout << "=================================\n\n";
     string name;
-    cout<<"Insert your name: "; cin>>name;
-    cout<<"\nHello,"<<name<<"What would do you like to do today?\n";
-    cout<<"1.Check Schedule information\n";
-    cout<<"2.Request changes to your Schedule\n";
-    cout<<"3.Quit\n";
+    cout << "Insert your name: ";
+    cin >> name;
+    cout << "\nHello, " << name << "!\nWhat would do you like to do today?\n";
+    cout << "1.Check Schedule information\n";
+    cout << "2.Request changes to your Schedule\n";
+    cout << "3.Quit\n";
     int n;
-    cin>>n;
+    cin >> n;
     switch(n) {
         case 1:
             // code block
@@ -81,7 +82,7 @@ void Menu::ShowStudentSchedule (ScheduleManager& manager, Student& s){
     for (ClassSchedule cs: l) {
         cout<<"UC:"<<cs.getCodeUC()<<" Turma:"<<cs.getCodeClass()<<"\n";
         for (Slot h: cs.getSlots()){
-            cout<<h.getType()<<"->"<<h.getWeekDay()<<": "<<h.getStart()<<"-"<<h.getEnd()<<"\n";
+            cout<<h.getType()<<"->"<<h.getWeekDay()<<": "<<h.getStart()<<"-"<<h.getDuration()<<"\n";
         }
     }
 

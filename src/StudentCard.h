@@ -32,7 +32,7 @@ public:
      * Returns the ID of the StudentCard object
      * @return ID of the StudentCard object
      */
-    int getID();
+    int getID() const;
 
     /**
      * Assigns a new ID to the StudentCard object
@@ -44,13 +44,13 @@ public:
      * Returns the name of the StudentCard object
      * @return Name of the StudentCard object
      */
-    string getName();
+    string getName() const;
 
     /**
      * Assigns a new name to the StudentCard object
      * @param newName New name to be assigned
      */
-    void setName(string newName);
+    void setName(const string& newName);
 
     /**
      * Equality operator for StudentCards objects

@@ -6,18 +6,18 @@
 
 Year::Year(int n): number(n) {}
 
-Year::Year(int n, list<UC> ucs): number(n), ucs(ucs) {}
+Year::Year(int n, list<UC> & ucs): number(n), ucs(ucs) {}
 
 Year::Year(const Year& y1) {
     this->number = y1.number;
     this->ucs = y1.ucs;
 }
 
-int Year::getNumber() {
+int Year::getNumber() const {
     return this->number;
 }
 
-list<UC> Year::getUCs() {
+list<UC> Year::getUCs() const {
     return this->ucs;
 }
 

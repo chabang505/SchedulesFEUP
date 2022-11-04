@@ -4,20 +4,20 @@
 
 #include "Turma.h"
 
-Turma::Turma(string c): code(c) {}
+Turma::Turma(string c): code(std::move(c)) {}
 
-Turma::Turma(std::string c, list<StudentCard> s): code(c), students(s) {}
+Turma::Turma(string c, list<StudentCard> & s): code(std::move(c)), students(s) {}
 
 Turma::Turma(const Turma &t1) {
     this->code = t1.code;
     this->students = t1.students;
 }
 
-string Turma::getCode() {
+string Turma::getCode() const {
     return this->code;
 }
 
-list<StudentCard> Turma::getStudents() {
+list<StudentCard> Turma::getStudents() const {
     return students;
 }
 

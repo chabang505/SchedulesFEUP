@@ -4,14 +4,14 @@
 
 #include "StudentCard.h"
 
-StudentCard::StudentCard(int id, std::string n): id(id), name(n) {}
+StudentCard::StudentCard(int id, string n): id(id), name(std::move(n)) {}
 
 StudentCard::StudentCard(const StudentCard &s1) {
     this->id = s1.id;
     this->name = s1.name;
 }
 
-int StudentCard::getID() {
+int StudentCard::getID() const {
     return this->id;
 }
 
@@ -19,11 +19,11 @@ void StudentCard::setID(int newID) {
     this->id = newID;
 }
 
-string StudentCard::getName() {
+string StudentCard::getName() const {
     return this->name;
 }
 
-void StudentCard::setName(std::string newName) {
+void StudentCard::setName(const string& newName) {
     this->name = newName;
 }
 

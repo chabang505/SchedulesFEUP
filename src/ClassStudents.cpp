@@ -14,7 +14,7 @@ ClassStudents::ClassStudents(const ClassStudents& c1) {
     this->students = c1.students;
 }
 
-string ClassStudents::getCodeUC() {
+string ClassStudents::getCodeUC() const{
     return this->codeUC;
 }
 
@@ -22,7 +22,7 @@ void ClassStudents::setCodeUC(const string& newCodeUC) {
     this->codeUC = newCodeUC;
 }
 
-string ClassStudents::getCodeClass() {
+string ClassStudents::getCodeClass() const{
     return this->codeClass;
 }
 
