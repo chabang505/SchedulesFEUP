@@ -13,7 +13,7 @@
 using namespace std;
 
 class Request {
-    string type;
+    int type;
     int studentID;
     list<ClassUC> currentClasses;
     list<ClassUC> requestedClasses;
@@ -31,7 +31,15 @@ public:
      * @param cc List of the classes the student wants to change
      * @param rc List of the classes the student wants to start attending
      */
-    Request(string t, int id, list<ClassUC> & cc, list<ClassUC> & rc);
+    Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc);
+
+    /**
+     * Creates a new Request object
+     * @param t Type of the request
+     * @param id ID of the student making the request
+     * @param cc List of the classes the student wants to change
+     */
+    Request(int t, int id, list<ClassUC> & cc);
 
     /**
      * Creates a new Request object
@@ -43,7 +51,7 @@ public:
      * Returns the type of the Request object
      * @return Type of the Request object
      */
-    string getType() const;
+    int getType() const;
 
     /**
      * Returns the ID of the student that made the request
@@ -62,6 +70,12 @@ public:
      * @return List of classes the student wants to start attending
      */
     list<ClassUC> getRequestedClasses() const;
+
+    /**
+     * Returns the first element in the currentClasses list
+     * @return First element in currentClasses list
+     */
+    ClassUC getFirstClassUC() const;
 
 };
 

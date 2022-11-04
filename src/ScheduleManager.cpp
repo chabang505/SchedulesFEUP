@@ -73,7 +73,18 @@ void ScheduleManager::placeStudentInYears(int id, const string& name, const list
             }
         }
     }
+}
 
+void ScheduleManager::removeStudentFromYears(int studentID, const ClassUC& classUC) {
+    StudentCard student = StudentCard(studentID);
+    int yearNumber = findYear(classUC.getCodeClass());
+    for (auto & year: years) {
+        if (year.getNumber() == yearNumber) {
+            auto uc = year.findUC(classUC.getCodeUC());
+            auto turma = uc->findTurma(classUC.getCodeClass());
+            turma->removeStudent(student);
+        }
+    }
 }
 
 void ScheduleManager::readClassesFile(const string& fname){
@@ -217,24 +228,61 @@ void ScheduleManager::receiveRequest(Request& request) {
     this->requests.push(request);
 }
 
-string ScheduleManager::removeStudent(Request& request) {
-    // find the student
-    // remove his entry in classes of the requested class/UC
+void ScheduleManager::processRequests() {
+    while (!requests.empty()) {
+        directRequest(requests.front());
+        requests.pop();
+    }
 }
 
-string ScheduleManager::addStudent(Request& request) {
+void ScheduleManager::directRequest(const Request & request) {
+    switch (request.getType()) {
+        case 0:
+            removeStudent(request);
+            break;
+        case 1:
+            addStudent(request);
+            break;
+        case 2:
+            changeStudentClass(request);
+            break;
+        case 3:
+            changeStudentClasses(request);
+            break;
+    }
+}
+
+string ScheduleManager::removeStudent(const Request& request) {
+    // find the student
+    int studentID = request.getStudentID();
+    ClassUC classUC = request.getFirstClassUC();
+    auto it = findStudent(studentID);
+        if (it == students.end())
+            return "Error: Student not found in the system";
+        else {
+            // remove his entry in classes of the requested class/UC
+            Student student = (*it);
+            students.erase(it);
+            student.removeClassUC(classUC);
+            students.insert(student);
+            removeStudentFromYears(studentID, classUC);
+            return "Student successfully removed from the system";
+        }
+}
+
+string ScheduleManager::addStudent(const Request& request) {
     // find the student
     // check for constraints of class capacity and schedule conflicts
     // if possible add student to class
 }
 
-string ScheduleManager::changeStudentClass(Request& request) {
+string ScheduleManager::changeStudentClass(const Request& request) {
     // find the student
     // check for constraints of class capacity and schedule conflicts
     // if possible make change requested
 }
 
-string ScheduleManager::changeStudentClasses(Request& request) {
+string ScheduleManager::changeStudentClasses(const Request& request) {
     // find the student
     // while there are changes he requested:
         // check for constraints of class capacity and schedule conflicts
@@ -258,6 +306,7 @@ list<ClassSchedule> ScheduleManager::getStudentSchedule(Student &student) {
     }
     return res;
 }
+
 /*
 bool ScheduleManager::sortUCCode(ClassSchedule a, ClassSchedule b) {
     return(a.getCodeUC()<b.getCodeUC());

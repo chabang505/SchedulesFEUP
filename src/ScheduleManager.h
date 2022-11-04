@@ -66,6 +66,13 @@ public:
     void placeStudentInYears(int id, const string& name, const list<ClassUC> & classes);
 
     /**
+     * Removes the student from the list of Years on the system
+     * @param studentID ID of the student
+     * @param classUC Class where the student is to be removed from
+     */
+    void removeStudentFromYears(int studentID, const ClassUC& classUC);
+
+    /**
      * Reads the CSV file containing information on the classes
      * @param file Name of the file to be read
      */
@@ -98,7 +105,6 @@ public:
      */
     void createClassStudents(const string& fname);
 
-
     void orderByUCCode();
     void orderByName();
 
@@ -108,6 +114,11 @@ public:
     // - recolha de todos os dados necessarios para uma lista temporaria
     // - ordenar essa lista de acordo com o criterio do utilizador
 
+    /**
+     * Finds a student in the internal Student BST
+     * @param id ID of the student
+     * @return Iterator to the student if found, end() iterator otherwise
+     */
     set<Student>::iterator findStudent(int id);
 
     /**
@@ -117,32 +128,43 @@ public:
     void receiveRequest(Request& request);
 
     /**
+     * Processes the requests currently in the system
+     */
+    void processRequests();
+
+    /**
+     * Treats the request according to its type
+     * @param request Request to be directed
+     */
+    void directRequest(const Request& request);
+
+    /**
      * Removes a student from a class or UC
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string removeStudent(Request& request);
+    string removeStudent(const Request& request);
 
     /**
      * Adds a student to a class or UC
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string addStudent(Request& request);
+    string addStudent(const Request& request);
 
     /**
      * Performs a switch in a student's schedule, either between UCs or between classes
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string changeStudentClass(Request& request);
+    string changeStudentClass(const Request& request);
 
     /**
      * Performs multiple changes in a student's schedule, either between UCs or between classes
      * @param request Reference to a request containing the information needed
      * @return A string that reflects the success of the operation
      */
-    string changeStudentClasses(Request& request);
+    string changeStudentClasses(const Request& request);
 
     /**
      * Creates a list of the ClassUC's of the classes that the given Student object is enrolled in

@@ -6,6 +6,8 @@
 
 StudentCard::StudentCard(int id, string n): id(id), name(std::move(n)) {}
 
+StudentCard::StudentCard(int id): id(id) {}
+
 StudentCard::StudentCard(const StudentCard &s1) {
     this->id = s1.id;
     this->name = s1.name;
@@ -28,5 +30,5 @@ void StudentCard::setName(const string& newName) {
 }
 
 bool StudentCard::operator==(const StudentCard &c2) const {
-    return (this->id == c2.id && this->name == c2.name);
+    return (this->id == c2.id);
 }
