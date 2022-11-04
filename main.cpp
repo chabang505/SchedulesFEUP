@@ -10,10 +10,9 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    Menu m();
     ScheduleManager manager = ScheduleManager();
     manager.generateYears();
-    manager.readClassesPerUC("classes_per_uc.csv");
-    manager.readStudentsFile("students_classes.csv");
+    manager.readClassesPerUC("CSV/classes_per_uc.csv");
+    manager.readStudentsFile("CSV/students_classes.csv");
 }
 
