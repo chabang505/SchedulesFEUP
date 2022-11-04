@@ -4,7 +4,7 @@
 
 #include "Request.h"
 
-Request::Request(string t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
+Request::Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
 type(std::move(t)), studentID(id), currentClasses(cc), requestedClasses(rc) {}
 
 Request::Request(const Request& r1) {
@@ -14,7 +14,7 @@ Request::Request(const Request& r1) {
     this->requestedClasses = r1.requestedClasses;
 }
 
-string Request::getType() const{
+int Request::getType() const{
     return this->type;
 }
 

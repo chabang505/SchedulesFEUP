@@ -13,7 +13,9 @@
 using namespace std;
 
 class Request {
-    string type;
+    Request(int t, int id, list<ClassUC> &cc, list<ClassUC> &rc);
+
+    int type;
     int studentID;
     list<ClassUC> currentClasses;
     list<ClassUC> requestedClasses;
@@ -43,7 +45,7 @@ public:
      * Returns the type of the Request object
      * @return Type of the Request object
      */
-    string getType() const;
+    int getType() const;
 
     /**
      * Returns the ID of the student that made the request
