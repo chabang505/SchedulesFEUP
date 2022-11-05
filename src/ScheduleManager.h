@@ -29,6 +29,13 @@ public:
     ScheduleManager();
 
     /**
+     * Returns the corresponding ClassSchedule object of a given ClassUC object
+     * @param classUC ClassUC object to be consulted
+     * @return ClassSchedule object corresponding to ClassUC object
+     */
+    ClassSchedule getClassSchedule(const ClassUC& classUC);
+
+    /**
      * Checks if the schedule of a class already exists in the system
      * @param codeClass Code of the class
      * @param codeUC Code of the UC
@@ -91,6 +98,36 @@ public:
      * @param codeClass Code of the class
      */
     void addOneToClass(const string& codeUC, const string& codeClass);
+
+    /**
+     * Decrements the number of students in a ClassUC by one
+     * @param codeUC Code of the UC
+     * @param codeClass Code of the class
+     */
+    void removeOneFromClass(const string& codeUC, const string& codeClass);
+
+    /**
+     * Checks if all classes within a UC have a balanced number of students
+     * @param codeUC Code of the UC
+     * @return True if all classes of the UC are balanced, false otherwise
+     */
+    bool ucHasBalance(const string& codeUC);
+
+    /**
+     * Checks if a class is compatible with a student's schedule
+     * @param classUC Reference to ClassUC to compare
+     * @param student Reference to the Student whose schedule is to be compared
+     * @return True if the class is compatible with the schedule, false otherwise
+     */
+    bool isClassCompatible(const ClassUC& classUC, const Student& student);
+
+    /**
+     * Checks if a student can be placed in a certain class
+     * @param student Student object to be placed
+     * @param classUC ClassUC object where student is to be placed
+     * @return True if student can be placed in the class, false otherwise
+     */
+    bool studentCanBePlaced(const Student& student, ClassUC& classUC);
 
     /**
      * Reads the CSV file containing information on the classes
@@ -172,11 +209,11 @@ public:
     list<ClassUC> listClassUCbyStudent(Student &student);
 
     /**
-     * Creates a list of the ClassSchedules of the ClassUc's that the given Student object is enrolled in
+     * Creates a list of the ClassSchedules of the ClassUCs that the given Student object is enrolled in
      * @param student Reference to the student we want to obtain information about
-     * @return a list of the ClassSchedule's
+     * @return List of the student's ClassSchedules
      */
-    list<ClassSchedule> getStudentSchedule(Student &student);
+    list<ClassSchedule> getStudentSchedule(const Student &student);
 };
 
 

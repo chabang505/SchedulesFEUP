@@ -84,6 +84,13 @@ public:
      */
     int numOfSlots() const;
 
+    /**
+     * Checks if two ClassSchedule objects are compatible by comparing their slots
+     * @param cs2 Reference to another ClassSchedule object
+     * @return True if the ClassSchedules are compatible, false otherwise
+     */
+    bool isCompatible(const ClassSchedule& cs2);
+
 };
 
 

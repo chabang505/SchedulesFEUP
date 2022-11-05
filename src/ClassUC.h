@@ -7,6 +7,7 @@
 
 #include <string>
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 /**
@@ -17,7 +18,7 @@ class ClassUC {
     string codeUC;
     string codeClass;
     int numStudents;
-    int const static cap = 30; // max number of students in a class
+    int const static cap = 20; // max number of students in a class
 
 public:
     /**
@@ -26,6 +27,12 @@ public:
      * @param cc The internal class code
      */
     ClassUC(string cUC, string cc);
+
+    /**
+     * Creates a new ClassUC object, generating the codeClass automatically
+     * @param cUC The internal UC code
+     */
+    explicit ClassUC(string cUC);
 
     /**
      * Creates a new ClassUC object
@@ -88,6 +95,24 @@ public:
      * @return ClassUC object with number of students incremented by one
      */
     ClassUC operator ++(int);
+
+    /**
+     * Decrements the number of students attending the ClassUC, returning a new ClassUC object
+     * @return ClassUC object with number of students incremented by one
+     */
+    ClassUC operator --(int);
+
+    /**
+     * Checks if a ClassUC has the capacity to receive one more student
+     * @return True if it can receive one more student, false otherwise
+     */
+    bool hasCapacity() const;
+
+    /**
+     * Returns the next UC in the sequence
+     * @return Next UC in the sequence
+     */
+    ClassUC nextUC();
 
 };
 

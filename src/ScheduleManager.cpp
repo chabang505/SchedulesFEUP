@@ -18,6 +18,12 @@ int wdtoi(const string& weekDay) {
     }
 }
 
+ClassSchedule ScheduleManager::getClassSchedule(const ClassUC& classUC) {
+    for (ClassSchedule & schedule: classSchedules)
+        if (classUC.getCodeUC() == schedule.getCodeUC() && classUC.getCodeClass() == schedule.getCodeClass())
+            return schedule;
+}
+
 int ScheduleManager::classScheduleExists(const string &codeClass, const string &codeUC) {
     int index = 0;
     for (ClassSchedule c: ScheduleManager::classSchedules) {
@@ -102,7 +108,56 @@ void ScheduleManager::addOneToClass(const string& codeUC, const string& codeClas
     ClassUC classUC = (*it);
     classUCs.erase(it);
     classUC = classUC++;
-    pair<set<ClassUC>::iterator, bool> hasInserted = classUCs.insert(classUC);
+    classUCs.insert(classUC);
+}
+
+void ScheduleManager::removeOneFromClass(const string& codeUC, const string& codeClass) {
+    auto it = findClassUC(codeUC, codeClass);
+    ClassUC classUC = (*it);
+    classUCs.erase(it);
+    classUC = classUC--;
+    classUCs.insert(classUC);
+}
+
+bool ScheduleManager::ucHasBalance(const std::string &codeUC) {
+    ClassUC searchStart = ClassUC(codeUC);
+    ClassUC searchEnd = searchStart.nextUC();
+    auto itStart = findClassUC(searchStart.getCodeUC(), searchStart.getCodeClass());
+    auto itStart2 = itStart;
+    auto itEnd = findClassUC(searchEnd.getCodeUC(), searchEnd.getCodeClass());
+    itEnd--;
+    while(itStart != itEnd) {
+        while (itStart2 != itEnd) {
+            int difference = abs(itStart2->getNumStudents() - itEnd->getNumStudents());
+            if (difference >= 4)
+                return false;
+            itStart2++;
+        }
+        itStart2 = itStart;
+        itEnd--;
+    }
+    return true;
+}
+
+bool ScheduleManager::isClassCompatible(const ClassUC& classUC, const Student& student) {
+    list<ClassSchedule> schedule = getStudentSchedule(student);
+    ClassSchedule toCompare = getClassSchedule(classUC);
+    for (ClassSchedule cs: schedule)
+        if (cs.isCompatible(toCompare))
+            return true;
+    return false;
+}
+
+bool ScheduleManager::studentCanBePlaced(const Student& student, ClassUC& classUC) {
+    if (isClassCompatible(classUC, student) && classUC.hasCapacity()) {
+        classUC = classUC++;
+        if (ucHasBalance(classUC.getCodeUC())) {
+            classUC = classUC--;
+            return true;
+        }
+        classUC = classUC--;
+    }
+    return false;
 }
 
 void ScheduleManager::readClassesFile(const string& fname){
@@ -236,16 +291,35 @@ string ScheduleManager::removeStudent(const Request& request) {
             students.erase(it);
             student.removeClassUC(classUC);
             students.insert(student);
+            removeOneFromClass(classUC.getCodeUC(), classUC.getCodeClass());
             removeStudentFromYears(studentID, classUC);
             return "Student successfully removed from the system";
         }
 }
 
+
 string ScheduleManager::addStudent(const Request& request) {
     // find the student
     int studentID = request.getStudentID();
+    ClassUC classUC = request.getFirstClassUC();
     // check for constraints of class capacity and schedule conflicts
+    auto it = findStudent(studentID);
+        if (it == students.end())
+            return "Error: Student not found in the system";
     // if possible add student to class
+    Student student = (*it);
+    if (studentCanBePlaced(student, classUC)) {
+        students.erase(it);
+        student.addClassUC(classUC);
+        students.insert(student);
+        addOneToClass(classUC.getCodeUC(), classUC.getCodeClass());
+        list<ClassUC> classes;
+        classes.push_back(classUC);
+        placeStudentInYears(studentID, student.getName(), classes);
+        return "Student successfully placed in required class";
+    } else {
+        return "Student can't be placed in required class";
+    }
 }
 
 string ScheduleManager::changeStudentClass(const Request& request) {
@@ -268,14 +342,13 @@ list<ClassUC> ScheduleManager::listClassUCbyStudent(Student &student) {
 
 }
 
-list<ClassSchedule> ScheduleManager::getStudentSchedule(Student &student) {
+list<ClassSchedule> ScheduleManager::getStudentSchedule(const Student &student) {
     list<ClassUC> l = student.getClasses();
     list<ClassSchedule> res;
-    for (ClassUC uc: l) {
-        for (ClassSchedule cs: classSchedules) {
-            if (uc.getCodeClass()==cs.getCodeClass() && uc.getCodeUC()==cs.getCodeUC()) res.push_back(cs);
-        }
-    }
+    for (ClassUC & uc: l)
+        for (ClassSchedule & cs: classSchedules)
+            if (uc.getCodeClass()==cs.getCodeClass() && uc.getCodeUC()==cs.getCodeUC())
+                res.push_back(cs);
     return res;
 }
 
