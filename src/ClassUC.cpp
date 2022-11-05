@@ -8,7 +8,7 @@ ClassUC::ClassUC(string cUC, string cc): codeUC(cUC), codeClass(cc), numStudents
 ClassUC::ClassUC(const ClassUC& c1) {
     this->codeUC = c1.codeUC;
     this->codeClass = c1.codeClass;
-    this->numStudents = 0;
+    this->numStudents = c1.numStudents;
 }
 
 string ClassUC::getCodeUC() const { return this->codeUC; }
@@ -38,4 +38,11 @@ bool ClassUC::operator< (const ClassUC& c2) const {
         return this->codeUC < c2.codeUC;
     else
         return this->codeClass < c2.codeClass;
+}
+
+ClassUC ClassUC::operator ++(int) {
+    ClassUC temp(*this);
+    numStudents++;
+    temp.numStudents = numStudents;
+    return temp;
 }

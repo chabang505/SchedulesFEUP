@@ -83,6 +83,12 @@ public:
      */
     bool operator <(const ClassUC& c2) const;
 
+    /**
+     * Increments the number of students attending the ClassUC, returning a new ClassUC object
+     * @return ClassUC object with number of students incremented by one
+     */
+    ClassUC operator ++(int);
+
 };
 
 

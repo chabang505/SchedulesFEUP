@@ -11,14 +11,12 @@
 #include "Request.h"
 #include "Student.h"
 #include "ClassSchedule.h"
-#include "ClassStudents.h"
 #include "Year.h"
 
 using namespace std;
 
 class ScheduleManager {
     set<Student> students;
-    vector<ClassStudents> classStudents;
     queue<Request> requests;
     vector<ClassSchedule> classSchedules;
     set<ClassUC> classUCs;
@@ -73,6 +71,28 @@ public:
     void removeStudentFromYears(int studentID, const ClassUC& classUC);
 
     /**
+    * Finds a student in the internal Student BST
+    * @param id ID of the student
+    * @return Iterator to the student if found, end() iterator otherwise
+    */
+    set<Student>::iterator findStudent(int id);
+
+    /**
+     * Finds a ClassUC in the internal ClassUC BST
+     * @param codeUC Code of the UC
+     * @param codeClass Code of the class
+     * @return Iterator to the ClassUC if it exists, end() iterator otherwise
+     */
+    set<ClassUC>::iterator findClassUC(const string& codeUC, const string& codeClass);
+
+    /**
+     * Increments the number of students in a ClassUC by one
+     * @param codeUC Code of the UC
+     * @param codeClass Code of the class
+     */
+    void addOneToClass(const string& codeUC, const string& codeClass);
+
+    /**
      * Reads the CSV file containing information on the classes
      * @param file Name of the file to be read
      */
@@ -90,21 +110,6 @@ public:
      */
     void readStudentsFile(const string& fname);
 
-    /**
-     * Checks if a certain class and UC are already in a ClassStudents vector
-     * @param classes Vector of ClassStudents objects
-     * @param codeUC String with the code of the UC
-     * @param codeClass String with the code of the class
-     * @return Index of the element, if found, -1 otherwise
-     */
-    int hasClass(vector<ClassStudents> classes, const string& codeUC, const string& codeClass);
-
-    /**
-     * Reads students CSV file to create vector of ClassStudents
-     * @param fname Name of the file to be read
-     */
-    void createClassStudents(const string& fname);
-
     void orderByUCCode();
     void orderByName();
 
@@ -113,13 +118,6 @@ public:
     // funcoes de consulta:
     // - recolha de todos os dados necessarios para uma lista temporaria
     // - ordenar essa lista de acordo com o criterio do utilizador
-
-    /**
-     * Finds a student in the internal Student BST
-     * @param id ID of the student
-     * @return Iterator to the student if found, end() iterator otherwise
-     */
-    set<Student>::iterator findStudent(int id);
 
     /**
      * Receives the request and places it on a queue, to guarantee they are ordered and handled by time of arrival
