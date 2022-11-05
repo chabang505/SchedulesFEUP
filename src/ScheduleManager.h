@@ -159,14 +159,15 @@ public:
 
     /**
      * Processes the requests currently in the system
+     * @return A queue containing the results of the requests
      */
-    void processRequests();
+    queue<string> processRequests();
 
     /**
      * Treats the request according to its type
      * @param request Request to be directed
      */
-    void directRequest(const Request& request);
+    string directRequest(const Request& request);
 
     /**
      * Removes a student from a class or UC

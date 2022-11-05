@@ -25,9 +25,10 @@ void Menu::show(){
     bool tf = true;
     while(tf) {
         cout << "\nHello, " << name << "!\nWhat would do you like to do today?\n";
-        cout << "1.Check Schedule information\n";
-        cout << "2.Request changes to your Schedule\n";
-        cout << "3.Quit\n";
+        cout << "1. Check Schedule information\n";
+        cout << "2. Request changes to your Schedule\n";
+        cout << "3. End the day (process all requests)\n";
+        cout << "4. Quit\n";
         int n1;
         cin >> n1;
         switch (n1) {
@@ -86,7 +87,7 @@ void Menu::show(){
                         cin >> c1;
                         ClassUC classuc = ClassUC(uc1, c1);
                         Request request = Request(1, id1, classuc);
-                        addStudent(manager, request);
+                        receiveRequest(manager, request);
                         break;
                     }
                     case 2: {
@@ -101,7 +102,7 @@ void Menu::show(){
                         cin >> c2;
                         ClassUC classuc2 = ClassUC(uc2, c2);
                         Request request2 = Request(2, id2, classuc2);
-                        removeStudent(manager, request2);
+                        receiveRequest(manager, request2);
                         break;
                     }
                     case 3:{
@@ -127,7 +128,7 @@ void Menu::show(){
                         list<ClassUC> l2;
                         l2.push_back(classuc2);
                         Request request = Request(3, id1, l1, l2);
-                        changeStudentClass(manager, request);
+                        receiveRequest(manager, request);
                         break;
                     }
                     case 4:{
@@ -159,17 +160,25 @@ void Menu::show(){
                             l2.push_back(classuc2);
                             }
                         Request request = Request(4, id1, l1, l2);
-                        changeStudentClasses(manager, request);
+                        receiveRequest(manager, request);
                         }
                         break;
                 }
                 break;
-            case 3:
+            case 3: {
+                queue<string> replies = processRequests(manager);
+                while (!replies.empty()) {
+                    cout << replies.front() << endl;
+                    replies.pop();
+                }
+            }
+                break;
+            case 4:
                 tf = false;
                 cout << "You have successfully exited your Schedule Manager!";
                 break;
         }
-        if (n1 == 3) break;
+        if (n1 == 4) break;
         cout << "Would you like continue using the Schedule Manager?" << '\n';
         cout << "If you do insert y, if not insert n: ";
         char s; cin >> s;
@@ -180,25 +189,15 @@ void Menu::show(){
     }
 }
 
-string Menu::removeStudent(ScheduleManager& manager, Request& request) {
-    string reply = manager.removeStudent(request);
-    return reply;
+void Menu::receiveRequest(ScheduleManager& manager, Request& request) {
+    manager.receiveRequest(request);
 }
 
-string Menu::addStudent(ScheduleManager& manager, Request& request) {
-    string reply = manager.addStudent(request);
-    return reply;
+queue<string> Menu::processRequests(ScheduleManager& manager) {
+    queue<string> replies = manager.processRequests();
+    return replies;
 }
 
-string Menu::changeStudentClass(ScheduleManager& manager, Request& request) {
-    string reply = manager.changeStudentClass(request);
-    return reply;
-}
-
-string Menu::changeStudentClasses(ScheduleManager& manager, Request& request) {
-    string reply = manager.changeStudentClasses(request);
-    return reply;
-}
 
 void Menu::showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort){
     list<ClassUC> res= manager.listClassUCbyStudent(studentid, sort);

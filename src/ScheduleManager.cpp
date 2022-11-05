@@ -254,28 +254,33 @@ void ScheduleManager::receiveRequest(Request& request) {
     this->requests.push(request);
 }
 
-void ScheduleManager::processRequests() {
+queue<string> ScheduleManager::processRequests() {
+    queue<string> replies;
+    string reply;
     while (!requests.empty()) {
-        directRequest(requests.front());
+        reply = directRequest(requests.front());
         requests.pop();
+        replies.push(reply);
     }
 }
 
-void ScheduleManager::directRequest(const Request & request) {
+string ScheduleManager::directRequest(const Request & request) {
+    string reply;
     switch (request.getType()) {
         case 1:
-            removeStudent(request);
+            reply = removeStudent(request);
             break;
         case 2:
-            addStudent(request);
+            reply = addStudent(request);
             break;
         case 3:
-            changeStudentClass(request);
+            reply = changeStudentClass(request);
             break;
         case 4:
-            changeStudentClasses(request);
+            reply = changeStudentClasses(request);
             break;
     }
+    return reply;
 }
 
 string ScheduleManager::removeStudent(const Request& request) {
