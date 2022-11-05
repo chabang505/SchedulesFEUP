@@ -211,11 +211,10 @@ public:
 
     /**
      * Creates a list of the ClassSchedules of the ClassUCs that the given Student object is enrolled in
-     * @param student Reference to the student we want to obtain information about
+     * @param studentID Id of the student we want to obtain information about
      * @return List of the student's ClassSchedules
      */
-    list<ClassSchedule> getStudentSchedule(const Student &student);
-
+    list<ClassSchedule> getStudentSchedule(int studentID);
 };
 
 

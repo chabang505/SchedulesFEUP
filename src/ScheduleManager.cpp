@@ -140,7 +140,7 @@ bool ScheduleManager::ucHasBalance(const std::string &codeUC) {
 }
 
 bool ScheduleManager::isClassCompatible(const ClassUC& classUC, const Student& student) {
-    list<ClassSchedule> schedule = getStudentSchedule(student);
+    list<ClassSchedule> schedule = getStudentSchedule(student.getId());
     ClassSchedule toCompare = getClassSchedule(classUC);
     for (ClassSchedule cs: schedule)
         if (cs.isCompatible(toCompare))
@@ -305,7 +305,7 @@ void ScheduleManager::undoRemoveStudent(const Request& request) {
     students.erase(it);
     student.addClassUC(classUC);
     students.insert(student);
-    addOneToClass(classUC);
+    addOneToClass(classUC.getCodeUC(), classUC.getCodeClass());
     list<ClassUC> classes;
     classes.push_back(classUC);
     placeStudentInYears(studentID, student.getName(), classes);
@@ -385,12 +385,11 @@ list<ClassUC> ScheduleManager::listClassUCbyStudent(int studentid, int sort) {
         l1.sort(sortClass);
     }
     return l1;
-
-
 }
 
-list<ClassSchedule> ScheduleManager::getStudentSchedule(const Student &student) {
-    list<ClassUC> l = student.getClasses();
+list<ClassSchedule> ScheduleManager::getStudentSchedule(int studentID) {
+    auto it = findStudent(studentID);
+    list<ClassUC> l = it->getClasses();
     list<ClassSchedule> res;
     for (ClassUC & uc: l)
         for (ClassSchedule & cs: classSchedules)

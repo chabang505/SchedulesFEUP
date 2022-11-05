@@ -16,7 +16,7 @@ class Request {
 
     int type;
     int studentID;
-    ClassUC classUC;
+    ClassUC classUC = ClassUC("L.EIC099", "9LEIC99");
     list<ClassUC> currentClasses;
     list<ClassUC> requestedClasses;
 

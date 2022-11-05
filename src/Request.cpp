@@ -16,6 +16,7 @@ Request::Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
 Request::Request(const Request& r1) {
     this->type = r1.type;
     this->studentID = r1.studentID;
+    this->classUC = r1.classUC;
     this->currentClasses = r1.currentClasses;
     this->requestedClasses = r1.requestedClasses;
 }
