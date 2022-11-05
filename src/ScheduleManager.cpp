@@ -263,16 +263,16 @@ void ScheduleManager::processRequests() {
 
 void ScheduleManager::directRequest(const Request & request) {
     switch (request.getType()) {
-        case 0:
+        case 1:
             removeStudent(request);
             break;
-        case 1:
+        case 2:
             addStudent(request);
             break;
-        case 2:
+        case 3:
             changeStudentClass(request);
             break;
-        case 3:
+        case 4:
             changeStudentClasses(request);
             break;
     }
@@ -281,31 +281,45 @@ void ScheduleManager::directRequest(const Request & request) {
 string ScheduleManager::removeStudent(const Request& request) {
     // find the student
     int studentID = request.getStudentID();
-    ClassUC classUC = request.getFirstClassUC();
+    ClassUC classUC = request.getClassUC();
     auto it = findStudent(studentID);
-        if (it == students.end())
-            return "Error: Student not found in the system";
-        else {
-            // remove his entry in classes of the requested class/UC
-            Student student = (*it);
-            students.erase(it);
-            student.removeClassUC(classUC);
-            students.insert(student);
-            removeOneFromClass(classUC.getCodeUC(), classUC.getCodeClass());
-            removeStudentFromYears(studentID, classUC);
-            return "Student successfully removed from the system";
-        }
+    if (it == students.end())
+        return "Error: Student not found in the system";
+    else {
+        // remove his entry in classes of the requested class/UC
+        Student student = (*it);
+        students.erase(it);
+        student.removeClassUC(classUC);
+        students.insert(student);
+        removeOneFromClass(classUC.getCodeUC(), classUC.getCodeClass());
+        removeStudentFromYears(studentID, classUC);
+        return "Student successfully removed from the system";
+    }
+}
+
+void ScheduleManager::undoRemoveStudent(const Request& request) {
+    int studentID = request.getStudentID();
+    ClassUC classUC = request.getClassUC();
+    auto it = findStudent(studentID);
+    Student student = (*it);
+    students.erase(it);
+    student.addClassUC(classUC);
+    students.insert(student);
+    addOneToClass(classUC);
+    list<ClassUC> classes;
+    classes.push_back(classUC);
+    placeStudentInYears(studentID, student.getName(), classes);
 }
 
 
 string ScheduleManager::addStudent(const Request& request) {
     // find the student
     int studentID = request.getStudentID();
-    ClassUC classUC = request.getFirstClassUC();
+    ClassUC classUC = request.getClassUC();
     // check for constraints of class capacity and schedule conflicts
     auto it = findStudent(studentID);
-        if (it == students.end())
-            return "Error: Student not found in the system";
+    if (it == students.end())
+        return "Error: Student not found in the system";
     // if possible add student to class
     Student student = (*it);
     if (studentCanBePlaced(student, classUC)) {
@@ -323,16 +337,42 @@ string ScheduleManager::addStudent(const Request& request) {
 }
 
 string ScheduleManager::changeStudentClass(const Request& request) {
-    // find the student
-    // check for constraints of class capacity and schedule conflicts
-    // if possible make change requested
+    int studentID = request.getStudentID();
+    auto it = findStudent(studentID);
+    if (it == students.end())
+        return "Error: Student not found in the system";
+    Student student = (*it);
+    list<ClassUC> classesToAdd = request.getCurrentClasses();
+    list<ClassUC> classesToRemove = request.getRequestedClasses();
+    removeStudent(Request(request.getType(), request.getStudentID(), (*classesToRemove.begin())));
+    if (addStudent(Request(request.getType(), request.getStudentID(), (*classesToAdd.begin()))) !=
+        "Student successfully placed in required class") {
+        undoRemoveStudent(Request(request.getType(), request.getStudentID(), classesToRemove));
+        return "Student can't be placed in required class";
+    } else
+        return "Student has successfully changed class";
 }
 
 string ScheduleManager::changeStudentClasses(const Request& request) {
     // find the student
-    // while there are changes he requested:
-        // check for constraints of class capacity and schedule conflicts
-        // if possible make change requested
+    int studentID = request.getStudentID();
+    auto it = findStudent(studentID);
+    if (it == students.end())
+        return "Error: Student not found in the system";
+    Student student = (*it);
+    list<ClassUC> classesToAdd = request.getCurrentClasses();
+    list<ClassUC> classesToRemove = request.getRequestedClasses();
+    auto itAdd = classesToAdd.begin();
+    auto itRemove = classesToRemove.begin();
+    while (itAdd != classesToAdd.end()) {
+        removeStudent(Request(request.getType(), request.getStudentID(), (*itRemove)));
+        if (addStudent(Request(request.getType(), request.getStudentID(), (*itAdd))) !=
+            "Student successfully placed in required class") {
+            undoRemoveStudent(Request(request.getType(), request.getStudentID(), (*itRemove)));
+            return "At least one of the requested changes couldn't be made";
+        }
+    }
+    return "All the changes were done successfully";
 
 }
 bool sortClass(ClassUC a, ClassUC b) {

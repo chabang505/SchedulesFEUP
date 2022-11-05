@@ -85,9 +85,7 @@ void Menu::show(){
                         string c1;
                         cin >> c1;
                         ClassUC classuc = ClassUC(uc1, c1);
-                        list<ClassUC> l;
-                        l.push_back(classuc);
-                        Request request = Request(1, id1, l);
+                        Request request = Request(1, id1, classuc);
                         addStudent(manager, request);
                         break;
                     }
@@ -102,9 +100,7 @@ void Menu::show(){
                         string c2;
                         cin >> c2;
                         ClassUC classuc2 = ClassUC(uc2, c2);
-                        list<ClassUC> l2;
-                        l2.push_back(classuc2);
-                        Request request2 = Request(2, id2, l2);
+                        Request request2 = Request(2, id2, classuc2);
                         removeStudent(manager, request2);
                         break;
                     }

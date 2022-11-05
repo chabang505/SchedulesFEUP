@@ -4,15 +4,14 @@
 
 #include "Request.h"
 
-Request::Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
-    type(t), studentID(id), currentClasses(cc), requestedClasses(rc) {}
-
 Request::Request(int t, int id, list<ClassUC> &cc):
-    type(t), studentID(id), currentClasses(cc) {}
+        type(t), studentID(id), currentClasses(cc) {}
 
+Request::Request(int t, int id, ClassUC cuc):
+        type(t), studentID(id), classUC(cuc) {}
 
-Request::Request(int t, int id, list<ClassUC> & cc):
-        type(std::move(t)), studentID(id), currentClasses(cc) {}
+Request::Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
+        type(t), studentID(id), currentClasses(cc), requestedClasses(rc) {}
 
 Request::Request(const Request& r1) {
     this->type = r1.type;
@@ -27,6 +26,10 @@ int Request::getType() const{
 
 int Request::getStudentID() const{
     return this->studentID;
+}
+
+ClassUC Request::getClassUC() const {
+    return this->classUC;
 }
 
 list<ClassUC> Request::getCurrentClasses() const{

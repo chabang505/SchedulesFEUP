@@ -16,15 +16,28 @@ class Request {
 
     int type;
     int studentID;
+    ClassUC classUC;
     list<ClassUC> currentClasses;
     list<ClassUC> requestedClasses;
 
 public:
-    // tipos de pedidos:
-    // remover aluno de turma/UC
-    // adicionar aluno a turma/UC
-    // alterar turma/UC de aluno
-    // alterar várias turmas/UC de aluno
+
+    /**
+     * Creates a new Request object
+     * @param t Type of the request
+     * @param id ID of the student making the request
+     * @param cc List of the classes the student wants to change
+     */
+    Request(int t, int id, list<ClassUC> & cc);
+
+    /**
+     * Creates a new Request object
+     * @param t Type of the request
+     * @param id ID of the student making the request
+     * @param cuc ClassUC intended for change (add/remove)
+     */
+    Request(int t, int id, ClassUC cuc);
+
     /**
      * Creates a new Request object
      * @param t Type of the request
@@ -34,13 +47,6 @@ public:
      */
     Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc);
 
-    /**
-     * Creates a new Request object
-     * @param t Type of the request
-     * @param id ID of the student making the request
-     * @param cc List of the classes the student wants to change
-     */
-    Request(int t, int id, list<ClassUC> & cc);
 
     /**
      * Creates a new Request object
@@ -59,6 +65,12 @@ public:
      * @return ID of the student that made the request
      */
     int getStudentID() const;
+
+    /**
+     * Returns the simple ClassUC on the request
+     * @return ClassUC on the request
+     */
+    ClassUC getClassUC() const;
 
     /**
      * Returns the list of classes the student wants to change

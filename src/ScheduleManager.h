@@ -150,11 +150,6 @@ public:
     void orderByUCCode();
     void orderByName();
 
-    // mais funcoes de ordenaçao
-
-    // funcoes de consulta:
-    // - recolha de todos os dados necessarios para uma lista temporaria
-    // - ordenar essa lista de acordo com o criterio do utilizador
 
     /**
      * Receives the request and places it on a queue, to guarantee they are ordered and handled by time of arrival
@@ -179,6 +174,12 @@ public:
      * @return A string that reflects the success of the operation
      */
     string removeStudent(const Request& request);
+
+    /**
+     * Undoes the removal of a student from the system
+     * @param request Request that was submitted for the student removal
+     */
+    void undoRemoveStudent(const Request& request);
 
     /**
      * Adds a student to a class or UC
