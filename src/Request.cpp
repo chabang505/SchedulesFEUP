@@ -7,6 +7,9 @@
 Request::Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
 type(std::move(t)), studentID(id), currentClasses(cc), requestedClasses(rc) {}
 
+Request::Request(int t, int id, list<ClassUC> & cc):
+        type(std::move(t)), studentID(id), currentClasses(cc) {}
+
 Request::Request(const Request& r1) {
     this->type = r1.type;
     this->studentID = r1.studentID;
