@@ -9,9 +9,9 @@
 
 
 class Menu {
+    ScheduleManager manager= ScheduleManager();
 
 public:
-
     /**
      * Default constructor for a Menu object
      */
@@ -82,30 +82,35 @@ public:
     string changeStudentClasses(ScheduleManager& manager, Request& request);
 
     /**
-     * Creates a list of the ClassUCS of the classes student s is enrolled in
+     * Prints the ClassUCS that the student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param request Reference to the Student object we want to obtain the information about
-     * @return List of the ClassUCs
+     * @param studentid Id of the student we obtained information about
      */
 
-    list<ClassUC> listClassUCbyStudent (ScheduleManager& manager, Student& s);
+    void showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort);
     /**
-     * Creates a list of the the uc codes of the classes student s is enrolled in
+     * Prints the uc codes of the classes student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
      * @param s Reference to the Student object we want to obtain the information about
-     * @return List of the UCCodes
      */
-    list<string> listUCbyStudent(ScheduleManager &manager, Student &s);
+    void showUCbyStudent(ScheduleManager &manager, int studentid);
 
     /**
-     * Creates a list of the the class codes of the classes student s is enrolled in
+     * Prints the class codes of the classes student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param s Reference to the Student object we want to obtain the information about
-     * @return List of the ClassCodes
+     * @param studentid Id of the student we obtained information about
      */
-    list<string> listClassbyStudent(ScheduleManager &manager, Student &s);
+    void showClassbyStudent(ScheduleManager &manager, int studentid);
 
-    void ShowStudentSchedule(ScheduleManager &manager, Student &s);
+    /**
+     * Prints the class and uc codes of the classes student s is enrolled in, along with the respective slots
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param studentid Id of the student we obtained information about
+     */
+
+    void ShowStudentSchedule(ScheduleManager &manager, int studentid);
+
+    void show();
 };
 
 

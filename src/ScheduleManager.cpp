@@ -335,10 +335,17 @@ string ScheduleManager::changeStudentClasses(const Request& request) {
         // if possible make change requested
 
 }
-
-list<ClassUC> ScheduleManager::listClassUCbyStudent(Student &student) {
-    list<ClassUC> l1=student.getClasses();
+bool sortClass(ClassUC a, ClassUC b) {
+    return(a.getCodeClass()<b.getCodeClass());
+}
+list<ClassUC> ScheduleManager::listClassUCbyStudent(int studentid, int sort) {
+    auto it= findStudent(studentid);
+    list<ClassUC> l1 = (*it).getClasses();
+    if(sort==1){
+        l1.sort(sortClass);
+    }
     return l1;
+
 
 }
 

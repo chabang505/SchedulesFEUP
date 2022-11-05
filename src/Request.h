@@ -13,6 +13,7 @@
 using namespace std;
 
 class Request {
+
     int type;
     int studentID;
     list<ClassUC> currentClasses;

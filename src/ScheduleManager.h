@@ -203,10 +203,10 @@ public:
 
     /**
      * Creates a list of the ClassUC's of the classes that the given Student object is enrolled in
-     * @param student Reference to the student we want to obtain information about
+     * @param studentid Id of the student we want to obtain information about
      * @return a list of the ClassUC's
      */
-    list<ClassUC> listClassUCbyStudent(Student &student);
+    list<ClassUC> listClassUCbyStudent(int studentid, int sort);
 
     /**
      * Creates a list of the ClassSchedules of the ClassUCs that the given Student object is enrolled in
@@ -214,6 +214,7 @@ public:
      * @return List of the student's ClassSchedules
      */
     list<ClassSchedule> getStudentSchedule(const Student &student);
+
 };
 
 
