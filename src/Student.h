@@ -89,7 +89,13 @@ public:
      * Adds a new class to the Student's list of classes
      * @param newClass The new class to be added
      */
-    void addClass(const ClassUC& newClass);
+    void addClassUC(const ClassUC& newClass);
+
+    /**
+     * Removes a class from the Student's list of classes
+     * @param classToRemove Class to be removed
+     */
+    void removeClassUC(const ClassUC& classToRemove);
 };
 
 

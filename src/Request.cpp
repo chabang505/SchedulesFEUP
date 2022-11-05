@@ -5,7 +5,11 @@
 #include "Request.h"
 
 Request::Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc):
-type(std::move(t)), studentID(id), currentClasses(cc), requestedClasses(rc) {}
+    type(t), studentID(id), currentClasses(cc), requestedClasses(rc) {}
+
+Request::Request(int t, int id, list<ClassUC> &cc):
+    type(t), studentID(id), currentClasses(cc) {}
+
 
 Request::Request(int t, int id, list<ClassUC> & cc):
         type(std::move(t)), studentID(id), currentClasses(cc) {}
@@ -31,4 +35,8 @@ list<ClassUC> Request::getCurrentClasses() const{
 
 list<ClassUC> Request::getRequestedClasses() const{
     return this->requestedClasses;
+}
+
+ClassUC Request::getFirstClassUC() const{
+    return this->currentClasses.front();
 }

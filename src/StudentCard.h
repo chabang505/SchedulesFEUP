@@ -24,6 +24,12 @@ public:
 
     /**
      * Creates a new StudentCard object
+     * @param id ID of the student
+     */
+    explicit StudentCard(int id);
+
+    /**
+     * Creates a new StudentCard object
      * @param s1 Reference to an existing StudentCard object
      */
     StudentCard(const StudentCard& s1);
