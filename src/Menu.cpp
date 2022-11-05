@@ -30,8 +30,10 @@ void Menu::show(){
         cout << "3.Quit\n";
         int n1;
         cin >> n1;
+
         switch (n1) {
             case 1:
+                cout<<"Choose the type of information you would like to see!\n";
                 cout << "1.Check a students Schedule" << "\n";
                 cout << "2.Check the UC's and Classes that a student is enrolled in" << "\n";
                 cout << "3.Check the UC's a student is enrolled in" << "\n";
@@ -207,10 +209,16 @@ string Menu::changeStudentClasses(ScheduleManager& manager, Request& request) {
 
 void Menu::showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort){
     list<ClassUC> res= manager.listClassUCbyStudent(studentid, sort);
+    cout << "========================================\n";
+
     cout<<"UP"<<studentid<<" UC'S and Classes are:"<<"\n";
+    cout << "========================================\n";
+
     for (ClassUC x: res){
         cout<<" UC:"<<x.getCodeUC()<<" Class:"<<x.getCodeClass()<<"\n";
     }
+    cout << "========================================\n";
+
 }
 void Menu::showUCbyStudent (ScheduleManager& manager, int studentid){
     int sort=0;
@@ -219,10 +227,16 @@ void Menu::showUCbyStudent (ScheduleManager& manager, int studentid){
     for(auto x: l){
         res.push_back(x.getCodeUC());
     }
+    cout << "========================================\n";
+
     cout<<"UP"<<studentid<<" UC'S are:"<<"\n";
+    cout << "========================================\n";
+
     for(string s: res){
         cout<<" ->"<<s<<"\n";
     }
+    cout << "========================================\n";
+
 }
 
 void Menu::showClassbyStudent (ScheduleManager& manager, int studentid){
@@ -232,20 +246,32 @@ void Menu::showClassbyStudent (ScheduleManager& manager, int studentid){
     for(auto x: l){
         res.insert(x.getCodeClass());
     }
+    cout << "========================================\n";
+
     cout<<"UP"<<studentid<<" Classes are:"<<"\n";
+    cout << "========================================\n";
+
     for(string s: res){
         cout<<" ->"<<s<<"\n";
     }
+    cout << "========================================\n";
+
 }
 
 void Menu::ShowStudentSchedule (ScheduleManager& manager, int studentid){
     list<ClassSchedule> l = manager.getStudentSchedule(studentid);
+    cout << "========================================\n";
+
     cout<<"UP"<<studentid<<" School Schedule:"<<"\n";
+    cout << "========================================\n";
+
+    vector<string> wk = {"Monday", "Tuesday","Wednesday", "Thursday","Friday", "Saturday" };
     for (ClassSchedule cs: l) {
-        cout<<"UC:"<<cs.getCodeUC()<<" Class:"<<cs.getCodeClass()<<"\n";
+        cout<<"     UC:"<<cs.getCodeUC()<<" Class:"<<cs.getCodeClass()<<"\n";
         for (Slot h: cs.getSlots()){
-            cout<<h.getType()<<"->"<<h.getWeekDay()<<": "<<h.getStart()<<"-"<<h.getDuration()<<"\n";
+            cout<<"     "<<h.getType()<<"->"<<wk[h.getWeekDay()]<<": "<<h.getStart()<<"h"<<"-"<<h.getStart()+h.getDuration()<<"h"<<"\n";
         }
     }
+    cout << "========================================\n";
 
 }
