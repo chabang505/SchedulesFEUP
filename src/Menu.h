@@ -9,9 +9,9 @@
 
 
 class Menu {
+    ScheduleManager manager= ScheduleManager();
 
 public:
-
     /**
      * Default constructor for a Menu object
      */
@@ -84,31 +84,31 @@ public:
     /**
      * Prints the ClassUCS that the student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param request Reference to the Student object we want to obtain the information about
+     * @param studentid Id of the student we obtained information about
      */
 
-    void showClassUCbyStudent (ScheduleManager& manager, Student& s);
+    void showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort);
     /**
      * Prints the uc codes of the classes student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
      * @param s Reference to the Student object we want to obtain the information about
      */
-    void showUCbyStudent(ScheduleManager &manager, Student &s);
+    void showUCbyStudent(ScheduleManager &manager, int studentid);
 
     /**
      * Prints the class codes of the classes student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param s Reference to the Student object we want to obtain the information about
+     * @param studentid Id of the student we obtained information about
      */
-    void showClassbyStudent(ScheduleManager &manager, Student &s);
+    void showClassbyStudent(ScheduleManager &manager, int studentid);
 
     /**
      * Prints the class and uc codes of the classes student s is enrolled in, along with the respective slots
      * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param s  Reference to the Student object we want to obtain the information about
+     * @param studentid Id of the student we obtained information about
      */
 
-    void ShowStudentSchedule(ScheduleManager &manager, Student &s);
+    void ShowStudentSchedule(ScheduleManager &manager, int studentid);
 
     void show();
 };

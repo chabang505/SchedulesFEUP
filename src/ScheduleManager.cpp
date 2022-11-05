@@ -18,6 +18,12 @@ int wdtoi(const string& weekDay) {
     }
 }
 
+ClassSchedule ScheduleManager::getClassSchedule(const ClassUC& classUC) {
+    for (ClassSchedule & schedule: classSchedules)
+        if (classUC.getCodeUC() == schedule.getCodeUC() && classUC.getCodeClass() == schedule.getCodeClass())
+            return schedule;
+}
+
 int ScheduleManager::classScheduleExists(const string &codeClass, const string &codeUC) {
     int index = 0;
     for (ClassSchedule c: ScheduleManager::classSchedules) {
@@ -73,7 +79,85 @@ void ScheduleManager::placeStudentInYears(int id, const string& name, const list
             }
         }
     }
+}
 
+void ScheduleManager::removeStudentFromYears(int studentID, const ClassUC& classUC) {
+    StudentCard student = StudentCard(studentID);
+    int yearNumber = findYear(classUC.getCodeClass());
+    for (auto & year: years) {
+        if (year.getNumber() == yearNumber) {
+            auto uc = year.findUC(classUC.getCodeUC());
+            auto turma = uc->findTurma(classUC.getCodeClass());
+            turma->removeStudent(student);
+        }
+    }
+}
+
+set<Student>::iterator ScheduleManager::findStudent(const int id) {
+    Student s = Student(id);
+    return students.find(s);
+}
+
+set<ClassUC>::iterator ScheduleManager::findClassUC(const string& codeUC, const string& codeClass) {
+    ClassUC cuc = ClassUC(codeUC, codeClass);
+    return classUCs.find(cuc);
+}
+
+void ScheduleManager::addOneToClass(const string& codeUC, const string& codeClass) {
+    auto it = findClassUC(codeUC, codeClass);
+    ClassUC classUC = (*it);
+    classUCs.erase(it);
+    classUC = classUC++;
+    classUCs.insert(classUC);
+}
+
+void ScheduleManager::removeOneFromClass(const string& codeUC, const string& codeClass) {
+    auto it = findClassUC(codeUC, codeClass);
+    ClassUC classUC = (*it);
+    classUCs.erase(it);
+    classUC = classUC--;
+    classUCs.insert(classUC);
+}
+
+bool ScheduleManager::ucHasBalance(const std::string &codeUC) {
+    ClassUC searchStart = ClassUC(codeUC);
+    ClassUC searchEnd = searchStart.nextUC();
+    auto itStart = findClassUC(searchStart.getCodeUC(), searchStart.getCodeClass());
+    auto itStart2 = itStart;
+    auto itEnd = findClassUC(searchEnd.getCodeUC(), searchEnd.getCodeClass());
+    itEnd--;
+    while(itStart != itEnd) {
+        while (itStart2 != itEnd) {
+            int difference = abs(itStart2->getNumStudents() - itEnd->getNumStudents());
+            if (difference >= 4)
+                return false;
+            itStart2++;
+        }
+        itStart2 = itStart;
+        itEnd--;
+    }
+    return true;
+}
+
+bool ScheduleManager::isClassCompatible(const ClassUC& classUC, const Student& student) {
+    list<ClassSchedule> schedule = getStudentSchedule(student);
+    ClassSchedule toCompare = getClassSchedule(classUC);
+    for (ClassSchedule cs: schedule)
+        if (cs.isCompatible(toCompare))
+            return true;
+    return false;
+}
+
+bool ScheduleManager::studentCanBePlaced(const Student& student, ClassUC& classUC) {
+    if (isClassCompatible(classUC, student) && classUC.hasCapacity()) {
+        classUC = classUC++;
+        if (ucHasBalance(classUC.getCodeUC())) {
+            classUC = classUC--;
+            return true;
+        }
+        classUC = classUC--;
+    }
+    return false;
 }
 
 void ScheduleManager::readClassesFile(const string& fname){
@@ -159,105 +243,122 @@ void ScheduleManager::readStudentsFile(const string& fname){
             getline(inputString, codeClass, ',');
             ClassUC c1 = ClassUC(codeUC, codeClass);
             classes.push_back(c1);
+            addOneToClass(codeUC, codeClass);
         }
     } else {
         cout << "Could not open the file" << endl;
     }
 }
 
-int ScheduleManager::hasClass(vector<ClassStudents> classes, const string& codeUC, const string& codeClass) {
-    int index = 0;
-    for (auto & classe : classes) {
-        if (classe.getCodeUC() == codeUC && classe.getCodeClass() == codeClass )
-            return index;
-        else {
-            index++;
-            continue;
-        }
-    }
-    return -1;
-}
-
-void ScheduleManager::createClassStudents(const string& fname) {
-    string line;
-    ifstream file(fname);
-    getline(file, line);
-    if (file.is_open()) {
-        string temp_string;
-        int id;
-        string codeUC;
-        string codeClass;
-        vector<int> students;
-        while (getline(file, line)) {
-            stringstream inputString(line);
-            getline(inputString, temp_string, ',');
-            id = stoi(temp_string);
-            getline(inputString, temp_string, ',');
-            getline(inputString, codeUC, ',');
-            getline(inputString, codeClass, ',');
-            int index = hasClass(classStudents, codeUC, codeClass);
-            if (index != -1) {
-                classStudents[index].addStudent(id);
-            } else {
-                students.push_back(id);
-                ClassStudents c1 = ClassStudents(codeUC, codeClass, students);
-                classStudents.push_back(c1);
-            }
-        }
-    } else
-        cout << "Could not open the file" << endl;
-}
-
-set<Student>::iterator ScheduleManager::findStudent(const int id) {
-    Student s = Student(id);
-    return students.find(s);
-}
-
 void ScheduleManager::receiveRequest(Request& request) {
     this->requests.push(request);
 }
 
-string ScheduleManager::removeStudent(Request& request) {
-    // find the student
-    // remove his entry in classes of the requested class/UC
+void ScheduleManager::processRequests() {
+    while (!requests.empty()) {
+        directRequest(requests.front());
+        requests.pop();
+    }
 }
 
-string ScheduleManager::addStudent(Request& request) {
+void ScheduleManager::directRequest(const Request & request) {
+    switch (request.getType()) {
+        case 0:
+            removeStudent(request);
+            break;
+        case 1:
+            addStudent(request);
+            break;
+        case 2:
+            changeStudentClass(request);
+            break;
+        case 3:
+            changeStudentClasses(request);
+            break;
+    }
+}
+
+string ScheduleManager::removeStudent(const Request& request) {
     // find the student
+    int studentID = request.getStudentID();
+    ClassUC classUC = request.getFirstClassUC();
+    auto it = findStudent(studentID);
+        if (it == students.end())
+            return "Error: Student not found in the system";
+        else {
+            // remove his entry in classes of the requested class/UC
+            Student student = (*it);
+            students.erase(it);
+            student.removeClassUC(classUC);
+            students.insert(student);
+            removeOneFromClass(classUC.getCodeUC(), classUC.getCodeClass());
+            removeStudentFromYears(studentID, classUC);
+            return "Student successfully removed from the system";
+        }
+}
+
+
+string ScheduleManager::addStudent(const Request& request) {
+    // find the student
+    int studentID = request.getStudentID();
+    ClassUC classUC = request.getFirstClassUC();
     // check for constraints of class capacity and schedule conflicts
+    auto it = findStudent(studentID);
+        if (it == students.end())
+            return "Error: Student not found in the system";
     // if possible add student to class
+    Student student = (*it);
+    if (studentCanBePlaced(student, classUC)) {
+        students.erase(it);
+        student.addClassUC(classUC);
+        students.insert(student);
+        addOneToClass(classUC.getCodeUC(), classUC.getCodeClass());
+        list<ClassUC> classes;
+        classes.push_back(classUC);
+        placeStudentInYears(studentID, student.getName(), classes);
+        return "Student successfully placed in required class";
+    } else {
+        return "Student can't be placed in required class";
+    }
 }
 
-string ScheduleManager::changeStudentClass(Request& request) {
+string ScheduleManager::changeStudentClass(const Request& request) {
     // find the student
     // check for constraints of class capacity and schedule conflicts
     // if possible make change requested
 }
 
-string ScheduleManager::changeStudentClasses(Request& request) {
+string ScheduleManager::changeStudentClasses(const Request& request) {
     // find the student
     // while there are changes he requested:
         // check for constraints of class capacity and schedule conflicts
         // if possible make change requested
 
 }
-
-list<ClassUC> ScheduleManager::listClassUCbyStudent(Student &student) {
-    list<ClassUC> l1=student.getClasses();
+bool sortClass(ClassUC a, ClassUC b) {
+    return(a.getCodeClass()<b.getCodeClass());
+}
+list<ClassUC> ScheduleManager::listClassUCbyStudent(int studentid, int sort) {
+    auto it= findStudent(studentid);
+    list<ClassUC> l1 = (*it).getClasses();
+    if(sort==1){
+        l1.sort(sortClass);
+    }
     return l1;
 
+
 }
 
-list<ClassSchedule> ScheduleManager::getStudentSchedule(Student &student) {
+list<ClassSchedule> ScheduleManager::getStudentSchedule(const Student &student) {
     list<ClassUC> l = student.getClasses();
     list<ClassSchedule> res;
-    for (ClassUC uc: l) {
-        for (ClassSchedule cs: classSchedules) {
-            if (uc.getCodeClass()==cs.getCodeClass() && uc.getCodeUC()==cs.getCodeUC()) res.push_back(cs);
-        }
-    }
+    for (ClassUC & uc: l)
+        for (ClassSchedule & cs: classSchedules)
+            if (uc.getCodeClass()==cs.getCodeClass() && uc.getCodeUC()==cs.getCodeUC())
+                res.push_back(cs);
     return res;
 }
+
 /*
 bool ScheduleManager::sortUCCode(ClassSchedule a, ClassSchedule b) {
     return(a.getCodeUC()<b.getCodeUC());

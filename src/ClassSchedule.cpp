@@ -32,3 +32,11 @@ void ClassSchedule::addSlot(Slot &s1) {
 }
 
 int ClassSchedule::numOfSlots() const { return slots.size(); }
+
+bool ClassSchedule::isCompatible(const ClassSchedule &cs2) {
+    for (Slot s1: this->slots)
+        for (Slot s2: cs2.slots)
+            if (!s1.isCompatible(s2))
+                return false;
+    return true;
+}

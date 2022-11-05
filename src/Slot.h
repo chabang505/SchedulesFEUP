@@ -17,6 +17,7 @@ class Slot {
 
     int weekDay;
     float start;
+    float end;
     float duration;
     string type;
 
@@ -61,6 +62,12 @@ public:
     void setStart(float newStart);
 
     /**
+     * Returns the end time of the Slot
+     * @return The end time of the Slot
+     */
+    float getEnd() const;
+
+    /**
      * Returns the duration of the slot
      * @return Duration of the slot
      */
@@ -90,6 +97,13 @@ public:
      * @return True if Slot objects are equal, false otherwise
      */
     bool operator==(const Slot& s2) const;
+
+    /**
+     * Determines if two Slots are compatible in the schedule
+     * @param s2 Reference for Slot object to compare
+     * @return True if Slots are compatible, false otherwise
+     */
+    bool isCompatible(const Slot& s2) const;
 
     /**
      * Converts Slot object into string to display it in the terminal
