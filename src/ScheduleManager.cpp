@@ -213,6 +213,7 @@ set<Student>::iterator ScheduleManager::findStudent(const int id) {
     return students.find(s);
 }
 
+
 void ScheduleManager::receiveRequest(Request& request) {
     this->requests.push(request);
 }
@@ -266,6 +267,32 @@ list<ClassSchedule> ScheduleManager::getStudentSchedule(int studentid) {
     }
 
     return res;
+}
+
+list<StudentCard> ScheduleManager::listStudentsInClass(string classid, string ucid){
+    list<UC> l1;
+    for (Year y: years){
+        int n= findYear(classid);
+        if (y.getNumber()==n){
+            l1=y.getUCs();
+            break;
+        }
+    }
+    list<Turma> l2;
+    for (UC uc: l1){
+        if(uc.getCode()==ucid){
+            l2=uc.getTurmas();
+            break;
+        }
+    }
+    list<StudentCard> l3;
+    for (Turma t: l2){
+        if(t.getCode()==classid){
+            l3=t.getStudents();
+            break;
+        }
+    }
+    return l3;
 }
 
 /*

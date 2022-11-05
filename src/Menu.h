@@ -110,6 +110,8 @@ public:
 
     void ShowStudentSchedule(ScheduleManager &manager, int studentid);
 
+    void showStudentsInClass(ScheduleManager &manager, string classid, string ucid);
+
     void show();
 };
 

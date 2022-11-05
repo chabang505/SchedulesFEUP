@@ -10,6 +10,12 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+    ScheduleManager manager = ScheduleManager();
+    manager.generateYears();
+    manager.readClassesPerUC("classes_per_uc.csv");
+    manager.readStudentsFile("students_classes.csv");
+    manager.readClassesFile("classes.csv");
+    list<StudentCard> x= manager.listStudentsInClass("3LEIC08", "L.EIC023");
     Menu m=Menu();
 }
 

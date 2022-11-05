@@ -158,6 +158,11 @@ public:
      */
 
     list<ClassSchedule> getStudentSchedule(int studentid);
+
+    list<struct StudentCard> listStudentsInClass(string classid, string ucid);
+
+
+    _List_iterator<Year> findYear2(const string &codeClass);
 };
 
 
