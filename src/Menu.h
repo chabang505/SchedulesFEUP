@@ -87,7 +87,7 @@ public:
      * @param studentid Id of the student we obtained information about
      */
 
-    void showClassUCbyStudent (ScheduleManager& manager, int studentid);
+    void showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort);
     /**
      * Prints the uc codes of the classes student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation

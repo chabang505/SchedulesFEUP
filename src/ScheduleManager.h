@@ -149,7 +149,7 @@ public:
      * @param studentid Id of the student we want to obtain information about
      * @return a list of the ClassUC's
      */
-    list<ClassUC> listClassUCbyStudent(int studentid);
+    list<ClassUC> listClassUCbyStudent(int studentid, int sort);
 
     /**
      * Creates a list of the ClassSchedules of the ClassUc's that the given Student object is enrolled in

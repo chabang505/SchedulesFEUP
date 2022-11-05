@@ -48,7 +48,11 @@ void Menu::show(){
                     case 2:
                         cout<<"Insert Student id(ex:202009987): ";
                         int id2; cin>>id2;
-                        showClassUCbyStudent(manager, id2);
+                        cout<<"Choose Sorting Method:\n";
+                        cout<<"0.By UC Code\n";
+                        cout<<"1.By Class Code\n";
+                        int sort; cin>>sort;
+                        showClassUCbyStudent(manager, id2, sort);
                         break;
                     case 3:
                         cout<<"Insert Student id(ex:202009987): ";
@@ -201,15 +205,16 @@ string Menu::changeStudentClasses(ScheduleManager& manager, Request& request) {
     return reply;
 }
 
-void Menu::showClassUCbyStudent (ScheduleManager& manager, int studentid){
-    list<ClassUC> res= manager.listClassUCbyStudent(studentid);
+void Menu::showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort){
+    list<ClassUC> res= manager.listClassUCbyStudent(studentid, sort);
     cout<<"UP"<<studentid<<" UC'S and Classes are:"<<"\n";
     for (ClassUC x: res){
         cout<<" UC:"<<x.getCodeUC()<<" Class:"<<x.getCodeClass()<<"\n";
     }
 }
 void Menu::showUCbyStudent (ScheduleManager& manager, int studentid){
-    list<ClassUC> l= manager.listClassUCbyStudent(studentid);
+    int sort=0;
+    list<ClassUC> l= manager.listClassUCbyStudent(studentid, sort);
     list<string> res;
     for(auto x: l){
         res.push_back(x.getCodeUC());
@@ -221,10 +226,11 @@ void Menu::showUCbyStudent (ScheduleManager& manager, int studentid){
 }
 
 void Menu::showClassbyStudent (ScheduleManager& manager, int studentid){
-    list<ClassUC> l= manager.listClassUCbyStudent(studentid);
-    list<string> res;
+    int sort=1;
+    list<ClassUC> l= manager.listClassUCbyStudent(studentid, sort);
+    set<string> res;
     for(auto x: l){
-        res.push_back(x.getCodeClass());
+        res.insert(x.getCodeClass());
     }
     cout<<"UP"<<studentid<<" Classes are:"<<"\n";
     for(string s: res){
