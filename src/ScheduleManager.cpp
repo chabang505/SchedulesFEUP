@@ -262,6 +262,7 @@ queue<string> ScheduleManager::processRequests() {
         requests.pop();
         replies.push(reply);
     }
+    return replies;
 }
 
 string ScheduleManager::directRequest(const Request & request) {
@@ -347,8 +348,8 @@ string ScheduleManager::changeStudentClass(const Request& request) {
     if (it == students.end())
         return "Error: Student not found in the system";
     Student student = (*it);
-    list<ClassUC> classesToAdd = request.getCurrentClasses();
-    list<ClassUC> classesToRemove = request.getRequestedClasses();
+    list<ClassUC> classesToAdd = request.getRequestedClasses();
+    list<ClassUC> classesToRemove = request.getCurrentClasses();
     removeStudent(Request(request.getType(), request.getStudentID(), (*classesToRemove.begin())));
     if (addStudent(Request(request.getType(), request.getStudentID(), (*classesToAdd.begin()))) !=
         "Student successfully placed in required class") {
@@ -365,8 +366,8 @@ string ScheduleManager::changeStudentClasses(const Request& request) {
     if (it == students.end())
         return "Error: Student not found in the system";
     Student student = (*it);
-    list<ClassUC> classesToAdd = request.getCurrentClasses();
-    list<ClassUC> classesToRemove = request.getRequestedClasses();
+    list<ClassUC> classesToAdd = request.getRequestedClasses();
+    list<ClassUC> classesToRemove = request.getCurrentClasses();
     auto itAdd = classesToAdd.begin();
     auto itRemove = classesToRemove.begin();
     while (itAdd != classesToAdd.end()) {

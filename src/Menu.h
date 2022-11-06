@@ -17,7 +17,6 @@ public:
      */
     Menu();
 
-
     // student request methods
     /**
      * Receives a request from the user and passes it to the Schedule Manager
@@ -33,12 +32,12 @@ public:
      */
     queue<string> processRequests(ScheduleManager& manager);
 
+    //information display methods
     /**
      * Prints the ClassUCS that the student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
      * @param studentid Id of the student we obtained information about
      */
-
     void showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort);
     /**
      * Prints the uc codes of the classes student s is enrolled in
@@ -61,6 +60,13 @@ public:
      */
 
     void ShowStudentSchedule(ScheduleManager &manager, int studentid);
+
+    /**
+     * Converts an int representing a day of the week into a presentable string
+     * @param weekDay Day to be converted
+     * @return String corresponding to the day of the week
+     */
+    string intToWD(int weekDay);
 
     /**
      *

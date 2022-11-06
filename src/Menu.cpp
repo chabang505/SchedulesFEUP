@@ -12,7 +12,6 @@ Menu::Menu() {
     manager.readStudentsFile("CSV/students_classes.csv");
     manager.readClassesFile("CSV/classes.csv");
     show();
-
 }
 
 void Menu::show(){
@@ -88,6 +87,7 @@ void Menu::show(){
                         ClassUC classuc = ClassUC(uc1, c1);
                         Request request = Request(1, id1, classuc);
                         receiveRequest(manager, request);
+                        cout << "Request received. All requests are processed at the end of the day." << endl;
                         break;
                     }
                     case 2: {
@@ -103,6 +103,7 @@ void Menu::show(){
                         ClassUC classuc2 = ClassUC(uc2, c2);
                         Request request2 = Request(2, id2, classuc2);
                         receiveRequest(manager, request2);
+                        cout << "Request received. All requests are processed at the end of the day." << endl;
                         break;
                     }
                     case 3:{
@@ -129,6 +130,7 @@ void Menu::show(){
                         l2.push_back(classuc2);
                         Request request = Request(3, id1, l1, l2);
                         receiveRequest(manager, request);
+                        cout << "Request received. All requests are processed at the end of the day." << endl;
                         break;
                     }
                     case 4:{
@@ -160,6 +162,7 @@ void Menu::show(){
                             l2.push_back(classuc2);
                             }
                         Request request = Request(4, id1, l1, l2);
+                        cout << "Request received. All requests are processed at the end of the day." << endl;
                         receiveRequest(manager, request);
                         }
                         break;
@@ -195,6 +198,10 @@ void Menu::receiveRequest(ScheduleManager& manager, Request& request) {
 
 queue<string> Menu::processRequests(ScheduleManager& manager) {
     queue<string> replies = manager.processRequests();
+    while (!replies.empty()) {
+        cout << replies.front() << endl;
+        replies.pop();
+    }
     return replies;
 }
 
@@ -236,9 +243,25 @@ void Menu::ShowStudentSchedule (ScheduleManager& manager, int studentid) {
     list<ClassSchedule> l = manager.getStudentSchedule(studentid);
     cout << "UP" << studentid << " School Schedule:" << '\n';
     for (ClassSchedule cs: l) {
-        cout << "UC: " << cs.getCodeUC() << " Class:" << cs.getCodeClass() << '\n';
+        cout << "UC: " << cs.getCodeUC() << " Class: " << cs.getCodeClass() << '\n';
         for (Slot h: cs.getSlots()){
-            cout << h.getType() << "->" << h.getWeekDay() << ": " << h.getStart() << "-" << h.getDuration() << '\n';
+            string weekDay = intToWD(h.getWeekDay());
+            cout << h.getType() << "->" << weekDay << ": " << h.getStart() << "-" << h.getEnd() << '\n';
         }
+    }
+}
+
+string Menu::intToWD(int weekDay) {
+    switch (weekDay) {
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday";
+        case 5:
+            return "Friday";
     }
 }
