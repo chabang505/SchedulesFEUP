@@ -22,6 +22,7 @@ void Menu::show(){
     cout << "Insert your name:\t";
     cin >> name;
     bool tf = true;
+    cout<<"\n\n*Warning*: Invalid inputs may cause the Schedule Manager to shut down!\n\n";
     while(tf) {
         cout << "\nHello, " << name << "!\nWhat would do you like to do today?\n";
         cout << "1. Check Schedule information\n";
@@ -49,36 +50,36 @@ void Menu::show(){
                 switch (n2) {
 
                     case 1:
-                        cout<<"Insert Student id(ex:202040617):";
+                        cout<<"->Insert Student id(eg.:202040617):";
                         int id1; cin>>id1;
                         ShowStudentSchedule(manager, id1);
                         break;
                     case 2:
-                        cout<<"Insert Student id(ex:202040617):";
+                        cout<<"->Insert Student id(eg.:202040617):";
                         int id2; cin>>id2;
                         cout << "Choose Sorting Method:\n";
-                        cout << "0.By Student Name\n";
-                        cout << "1.By Student Id\n";
-                        cout << "2.By Reverse Student Name\n";
-                        cout << "3.By Reverse Student Id\n";
+                        cout << "0.By UC Code\n";
+                        cout << "1.By Class Code\n";
+                        cout << "2.By Reverse Class Code\n";
+                        cout << "3.By Reverse UC Code\n";
                         int sort; cin>>sort;
                         showClassUCbyStudent(manager, id2, sort);
                         break;
                     case 3:
-                        cout<<"Insert Student id(ex:202040617):";
+                        cout<<"->Insert Student id(eg.:202040617):";
                         int id3; cin>>id3;
                         showUCbyStudent(manager, id3);
                         break;
                     case 4:
-                        cout<<"Insert Student id(ex:202040617):";
+                        cout<<"->Insert Student id(eg.:202040617):";
                         int id4; cin>>id4;
                         showClassbyStudent(manager, id4);
                         break;
                     case 5: {
-                        cout << "Insert Class Code(ex:3LEIC07):";
+                        cout << "->Insert Class Code(eg.:3LEIC07):";
                         string classid;
                         cin >> classid;
-                        cout << "Insert UC Code(ex:L.EIC021):";
+                        cout << "->Insert UC Code(eg.:L.EIC023):";
                         string ucid;
                         cin >> ucid;
                         cout << "Choose Sorting Method:\n";
@@ -92,7 +93,7 @@ void Menu::show(){
                         break;
                     }
                     case 6: {
-                        cout << "Insert UC Code(ex:L.EIC021):";
+                        cout << "->Insert UC Code(eg.:L.EIC023):";
                         string ucid;
                         cin >> ucid;
                         cout << "Choose Sorting Method:\n";
@@ -106,7 +107,7 @@ void Menu::show(){
                         break;
                     }
                     case 7: {
-                        cout << "Insert Year Number(Ex:1):";
+                        cout << "->Insert Year Number(eg.:1):";
                         int year;
                         cin >> year;
                         cout<<"0.By UC Code\n";
@@ -116,7 +117,7 @@ void Menu::show(){
                         break;
                     }
                     case 8: {
-                        cout << "Insert Num of UC's(Ex:2):";
+                        cout << "->Insert Num of UC's(eg.:2):";
                         int num;
                         cin >> num;
                         cout<<"Choose Sorting Method:\n";
@@ -131,17 +132,17 @@ void Menu::show(){
                         break;
                     }
                     case 9: {
-                        cout << "Insert UC Code(ex:L.EIC021):";
+                        cout << "->Insert UC Code(eg.:L.EIC023):";
                         string ucid;
                         cin >> ucid;
                         showNumStudentsByUC(manager,  ucid, 0);
                         break;
                     }
                     case 10: {
-                        cout << "Insert Class Code(ex:3LEIC07):";
+                        cout << "->Insert Class Code(eg.:3LEIC07):";
                         string classid;
                         cin >> classid;
-                        cout << "Insert UC Code(ex:L.EIC021):";
+                        cout << "Insert UC Code(eg.:L.EIC023):";
                         string ucid;
                         cin >> ucid;
                         showNumStudentsByClass(manager, classid, ucid, 0);
@@ -159,54 +160,54 @@ void Menu::show(){
                 cin >> n3;
                 switch (n3) {
                     case 1: {
-                        cout << "Insert Student ID (e.g.: 202009987): ";
+                        cout << "->Insert Student ID (e.g.: 202009987):";
                         int id1;
                         cin >> id1;
-                        cout << "Insert UC code (e.g.: L.EIC011): ";
+                        cout << "->Insert UC code (e.g.: L.EIC011):";
                         string uc1;
                         cin >> uc1;
-                        cout << "Insert Class Code (e.g.: 1LEIC13): ";
+                        cout << "->Insert Class Code (e.g.: 1LEIC13):";
                         string c1;
                         cin >> c1;
                         ClassUC classuc = ClassUC(uc1, c1);
                         Request request = Request(1, id1, classuc);
                         receiveRequest(manager, request);
-                        cout << "Request received. All requests are processed at the end of the day." << endl;
+                        cout << "\n*Request received*\n***All requests are processed at the end of the day.***\n" << endl;
                         break;
                     }
                     case 2: {
-                        cout << "Insert Student id(ex:202040617):";
+                        cout << "->Insert Student id(eg.:202040617):";
                         int id2;
                         cin >> id2;
-                        cout << "Insert UC code(ex:L.EIC011):";
+                        cout << "->Insert UC code(eg.:L.EIC011):";
                         string uc2;
                         cin >> uc2;
-                        cout << "Insert Class Code(ex:1LEIC13):";
+                        cout << "->Insert Class Code(eg.:1LEIC13):";
                         string c2;
                         cin >> c2;
                         ClassUC classuc2 = ClassUC(uc2, c2);
                         Request request2 = Request(2, id2, classuc2);
                         receiveRequest(manager, request2);
-                        cout << "Request received. All requests are processed at the end of the day." << endl;
+                        cout << "\n*Request received*\n***All requests are processed at the end of the day.***\n" << endl;
                         break;
                     }
                     case 3:{
-                        cout << "Insert Student ID: ";
+                        cout << "->Insert Student ID(eg.:202040617):";
                         int id1;
                         cin >> id1;
-                        cout << "Insert the 1st UC code(ex:L.EIC011):";
+                        cout << "->Insert the 1st UC code(eg.:L.EIC011):";
                         string uc1;
                         cin >> uc1;
-                        cout << "Insert the 1st corresponding Class Code:";
+                        cout << "->Insert the 1st corresponding Class Code:";
                         string c1;
                         cin >> c1;
                         ClassUC classuc1 = ClassUC(uc1, c1);
                         list<ClassUC> l1;
                         l1.push_back(classuc1);
-                        cout << "Insert the 2nd UC code (ex:L.EIC011): ";
+                        cout << "->Insert the 2nd UC code (eg.:L.EIC011):";
                         string uc2;
                         cin >> uc2;
-                        cout << "Insert the 1st corresponding Class Code(ex:1LEIC13):";
+                        cout << "->Insert the 1st corresponding Class Code(eg.:1LEIC13):";
                         string c2;
                         cin >> c2;
                         ClassUC classuc2 = ClassUC(uc2, c2);
@@ -214,31 +215,31 @@ void Menu::show(){
                         l2.push_back(classuc2);
                         Request request = Request(3, id1, l1, l2);
                         receiveRequest(manager, request);
-                        cout << "Request received. All requests are processed at the end of the day." << endl;
+                        cout << "\n*Request received*\n***All requests are processed at the end of the day.***\n" << endl;
                         break;
                     }
                     case 4:{
-                        cout << "Insert Student Id:";
+                        cout << "->Insert Student Id(eg.:202040617):";
                         int id1;
                         cin >> id1;
-                        cout<< "Insert number of classes you would like to change:";
+                        cout<< "->Insert number of classes you would like to change:";
                         int n; cin>>n;
                         list<ClassUC> l1;
                         list<ClassUC> l2;
                         for (size_t i = 0; i < n; n++) {
-                            cout << "Insert the 1st UC code (e.g.: L.EIC011): ";
+                            cout << "->Insert the 1st UC code (e.g.: L.EIC011):";
                             string uc1;
                             cin >> uc1;
-                            cout << "Insert the 1st corresponding Class Code(ex:1LEIC13):";
+                            cout << "->Insert the 1st corresponding Class Code(eg.:1LEIC13):";
                             string c1;
                             cin >> c1;
                             ClassUC classuc1 = ClassUC(uc1, c1);
 
                             l1.push_back(classuc1);
-                            cout << "Insert the 2nd UC code(ex:L.EIC011):";
+                            cout << "->Insert the 2nd UC code(eg.:L.EIC011):";
                             string uc2;
                             cin >> uc2;
-                            cout << "Insert the 2nd corresponding Class Code(ex:1LEIC13):";
+                            cout << "->Insert the 2nd corresponding Class Code(eg.:1LEIC13):";
                             string c2;
                             cin >> c2;
                             ClassUC classuc2 = ClassUC(uc2, c2);
@@ -246,7 +247,7 @@ void Menu::show(){
                             l2.push_back(classuc2);
                             }
                         Request request = Request(4, id1, l1, l2);
-                        cout << "Request received. All requests are processed at the end of the day." << endl;
+                        cout << "\n*Request received*\n***All requests are processed at the end of the day.***\n" << endl;
                         receiveRequest(manager, request);
                         }
                         break;
@@ -267,7 +268,7 @@ void Menu::show(){
         }
         if (n1 == 4) break;
         cout << "Would you like continue using the Schedule Manager?" << '\n';
-        cout << "If you do insert y, if not insert n: ";
+        cout << "->If you do insert y, if not insert n: ";
         char s; cin >> s;
         if (s == 'n' || s == 'N') {
             tf = false;
@@ -409,13 +410,13 @@ void Menu::showStudentsByNumUC(ScheduleManager &manager, int numuc, int sort){
 void Menu::showNumStudentsByUC(ScheduleManager &manager, string ucid, int sort){
     list<StudentCard> l= manager.listStudentsInUC(ucid, sort);
     cout << "=============================================================\n";
-    cout<<"The Num of Students enrolled in UC "<<ucid<<": "<<l.size()<<"\n";
+    cout<<"The Number of Students enrolled in UC "<<ucid<<": "<<l.size()<<"\n";
     cout << "=============================================================\n";
 }
 void Menu::showNumStudentsByClass(ScheduleManager &manager, string classid, string ucid, int sort){
     list<StudentCard> l= manager.listStudentsInClass(classid, ucid, sort);
     cout << "===================================================================\n";
-    cout<<"The Num of Students enrolled in UC "<<ucid<<"-> Class "<<classid<<": "<<l.size()<<"\n";
+    cout<<"The Number of Students enrolled in UC "<<ucid<<" -> Class "<<classid<<": "<<l.size()<<"\n";
     cout << "===================================================================\n";
 }
 
