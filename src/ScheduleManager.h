@@ -215,7 +215,12 @@ public:
      * @param studentID Id of the student we want to obtain information about
      * @return List of the student's ClassSchedules
      */
-    list<ClassSchedule> getStudentSchedule(int studentID);
+    list<ClassSchedule> getStudentSchedule(int studentid);
+
+    list<struct StudentCard> listStudentsInClass(string classid, string ucid, int sort);
+    list<struct StudentCard> listStudentsInUC(string ucid, int sort);
+    list<UC> listUCbyYear(int year);
+    list<Student> listStudentsByNumUC(int numuc, int sort);
 };
 
 

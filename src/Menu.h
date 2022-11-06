@@ -60,6 +60,21 @@ public:
      */
 
     void ShowStudentSchedule(ScheduleManager &manager, int studentid);
+    /**
+     *
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param classid
+     * @param ucid
+     * @param sort
+     */
+
+    void showStudentsInClass(ScheduleManager &manager, string classid, string ucid, int sort);
+
+    void showStudentsInUC(ScheduleManager &manager, string ucid, int sort);
+
+    void showUCbyYear(ScheduleManager &manager, int year);
+
+    void showStudentsByNumUC(ScheduleManager &manager, int numuc, int sort);
 
     /**
      * Converts an int representing a day of the week into a presentable string
@@ -72,6 +87,10 @@ public:
      *
      */
     void show();
+
+    void showNumStudentsByUC(ScheduleManager &manager, string ucid, int sort);
+
+    void showNumStudentsByClass(ScheduleManager &manager, string classid, string ucid, int sort);
 };
 
 
