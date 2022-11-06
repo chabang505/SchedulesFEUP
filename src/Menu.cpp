@@ -8,9 +8,9 @@ using namespace std;
 
 Menu::Menu() {
     manager.generateYears();
-    manager.readClassesPerUC("classes_per_uc.csv");
-    manager.readStudentsFile("students_classes.csv");
-    manager.readClassesFile("classes.csv");
+    manager.readClassesPerUC("CSV/classes_per_uc.csv");
+    manager.readStudentsFile("CSV/students_classes.csv");
+    manager.readClassesFile("CSV/classes.csv");
     show();
 }
 

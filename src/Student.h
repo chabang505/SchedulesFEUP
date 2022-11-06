@@ -18,6 +18,7 @@ using namespace std;
 class Student {
     int id;
     string name;
+    size_t numClasses = 0;
     list<ClassUC> classes;
 
 public:
@@ -34,6 +35,13 @@ public:
      * @param id Internal ID of the student
      */
     explicit Student(int id);
+
+    /**
+     * Creates a new Student object
+     * @param id Internal ID of the student
+     * @param nc Number of classes the student is enrolled in
+     */
+    Student(int id, int nc);
 
     /**
      * Creates a new Student object
@@ -70,6 +78,12 @@ public:
      * @return List of the ClassUCs the student is enrolled in
      */
     list<ClassUC> getClasses() const;
+
+    /**
+     * Returns the number of classes a student is enrolled in
+     * @return Number of classes a student is enrolled in
+     */
+    size_t getNumClasses() const;
 
     /**
      * Less operator for Student objects

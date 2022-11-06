@@ -423,6 +423,7 @@ list<ClassSchedule> ScheduleManager::getStudentSchedule(int studentID) {
                 res.push_back(cs);
     return res;
 }
+
 bool sortName(StudentCard& a, StudentCard& b) {
     return(a.getName()<b.getName());
 }
@@ -545,10 +546,11 @@ bool rsortId2(Student& a, Student& b) {
 }
 list<Student> ScheduleManager::listStudentsByNumUC(int numuc, int s){
     list<Student> res;
-    for (Student s: students){
-        if ((s.getClasses()).size()>numuc){
-            res.push_back(s);
-        }
+    Student stStart = Student(20209999, numuc+1);
+    auto itStart = students.lower_bound(stStart);
+    while (itStart != students.end()) {
+        res.push_back((*itStart));
+        itStart++;
     }
     if (s==0){
         res.sort(sortName2);
@@ -564,11 +566,3 @@ list<Student> ScheduleManager::listStudentsByNumUC(int numuc, int s){
     }
     return res;
 }
-
-/*
-bool ScheduleManager::sortUCCode(ClassSchedule a, ClassSchedule b) {
-    return(a.getCodeUC()<b.getCodeUC());
-}
-
-
-*/

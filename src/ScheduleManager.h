@@ -214,6 +214,7 @@ public:
      * @return List of the student's ClassSchedules
      */
     list<ClassSchedule> getStudentSchedule(int studentid);
+
     /**
      * Creates a list of Students that are enrolled in a given Class of UC
      * @param classid String representing Code of the Class(Turma), we want to find the information about
@@ -239,10 +240,10 @@ public:
     list<UC> listUCbyYear(int year, int sort);
 
     /**
-     * Creates a list of the Students enrolled in more than a given number of UC's
-     * @param numuc Integer representing the number of uc's
+     * Creates a list of the Students enrolled in more than a given number of UCs
+     * @param numuc Integer representing the number of UCs
      * @param sort Integer representing sort method
-     * @return The list of Students enrolled in more than a given number of UC's
+     * @return The list of Students enrolled in more than a given number of UCs
      */
     list<Student> listStudentsByNumUC(int numuc, int sort);
 };
