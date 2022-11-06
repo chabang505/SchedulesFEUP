@@ -33,7 +33,7 @@ void Menu::show(){
 
         switch (n1) {
             case 1:
-                cout << "Choose the type of information you would like to see!\n";
+                cout << "***Choose the type of information you would like to see!***\n";
                 cout << "1. Check a students Schedule" << "\n";
                 cout << "2. Check the UCss and Classes that a student is enrolled in" << "\n";
                 cout << "3. Check the UCss a student is enrolled in" << "\n";
@@ -150,7 +150,8 @@ void Menu::show(){
                 }
                 break;
             case 2:
-                cout << "1.Removes a student from a UC or class" << "\n";
+                cout << "***Choose the type of Request you would like to do!***\n";
+                cout << "1.Remove a student from a UC or class" << "\n";
                 cout << "2.Add a student to a UC or class" << "\n";
                 cout << "3.Change a Student's Class" << "\n";
                 cout << "4.Change Student's multiple Classes" << "\n";
@@ -261,7 +262,7 @@ void Menu::show(){
                 break;
             case 4:
                 tf = false;
-                cout << "You have successfully exited your Schedule Manager!";
+                cout << "***You have successfully exited your Schedule Manager!***";
                 break;
         }
         if (n1 == 4) break;
@@ -270,7 +271,7 @@ void Menu::show(){
         char s; cin >> s;
         if (s == 'n' || s == 'N') {
             tf = false;
-            cout << "You have successfully exited your Schedule Manager!";
+            cout << "***You have successfully exited your Schedule Manager!***";
         }
     }
 }
@@ -348,10 +349,13 @@ void Menu::ShowStudentSchedule (ScheduleManager& manager, int studentid) {
 
     vector<string> wk = {"Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday" };
     for (ClassSchedule cs: l) {
+
         cout<<"     UC:"<<cs.getCodeUC()<<" Class:"<<cs.getCodeClass()<<"\n";
         for (Slot h: cs.getSlots()){
             cout<<"     "<<h.getType()<<"->"<<wk[h.getWeekDay()]<<": "<<h.getStart()<<"h"<<"-"<<h.getStart()+h.getDuration()<<"h"<<"\n";
         }
+        cout << "-------------------------------------\n";
+
     }
     cout << "========================================\n";
 
