@@ -16,6 +16,7 @@ int wdtoi(const string& weekDay) {
             return i;
         }
     }
+    return -1;
 }
 
 ClassSchedule ScheduleManager::getClassSchedule(const ClassUC& classUC) {

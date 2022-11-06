@@ -402,6 +402,3 @@ void Menu::showNumStudentsByClass(ScheduleManager &manager, string classid, stri
     cout<<"The Num of Students enrolled in UC "<<ucid<<"-> Class "<<classid<<": "<<l.size()<<"\n";
     cout << "===================================================================\n";
 }
-
-
-}
