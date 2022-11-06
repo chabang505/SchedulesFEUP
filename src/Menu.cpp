@@ -8,9 +8,9 @@ using namespace std;
 
 Menu::Menu() {
     manager.generateYears();
-    manager.readClassesPerUC("CSV/classes_per_uc.csv");
-    manager.readStudentsFile("CSV/students_classes.csv");
-    manager.readClassesFile("CSV/classes.csv");
+    manager.readClassesPerUC("classes_per_uc.csv");
+    manager.readStudentsFile("students_classes.csv");
+    manager.readClassesFile("classes.csv");
     show();
 }
 
@@ -56,9 +56,11 @@ void Menu::show(){
                     case 2:
                         cout<<"Insert Student id(ex:202040617):";
                         int id2; cin>>id2;
-                        cout<<"Choose Sorting Method:\n";
-                        cout<<"0.By UC Code\n";
-                        cout<<"1.By Class Code\n";
+                        cout << "Choose Sorting Method:\n";
+                        cout << "0.By Student Name\n";
+                        cout << "1.By Student Id\n";
+                        cout << "2.By Reverse Student Name\n";
+                        cout << "3.By Reverse Student Id\n";
                         int sort; cin>>sort;
                         showClassUCbyStudent(manager, id2, sort);
                         break;
@@ -82,6 +84,8 @@ void Menu::show(){
                         cout << "Choose Sorting Method:\n";
                         cout << "0.By Student Name\n";
                         cout << "1.By Student Id\n";
+                        cout << "2.By Reverse Student Name\n";
+                        cout << "3.By Reverse Student Id\n";
                         int sort5;
                         cin >> sort5;
                         showStudentsInClass(manager, classid, ucid, sort5);
@@ -94,6 +98,8 @@ void Menu::show(){
                         cout << "Choose Sorting Method:\n";
                         cout << "0.By Student Name\n";
                         cout << "1.By Student Id\n";
+                        cout << "2.By Reverse Student Name\n";
+                        cout << "3.By Reverse Student Id\n";
                         int sort6;
                         cin >> sort6;
                         showStudentsInUC(manager,  ucid, sort6);
@@ -103,16 +109,22 @@ void Menu::show(){
                         cout << "Insert Year Number(Ex:1):";
                         int year;
                         cin >> year;
-                        showUCbyYear(manager,  year);
+                        cout<<"0.By UC Code\n";
+                        cout<<"1.By Reverse UC Code\n";
+                        int sort7; cin>>sort7;
+                        showUCbyYear(manager, year, sort7);
                         break;
                     }
                     case 8: {
                         cout << "Insert Num of UC's(Ex:2):";
                         int num;
                         cin >> num;
+                        cout<<"Choose Sorting Method:\n";
                         cout << "Choose Sorting Method:\n";
                         cout << "0.By Student Name\n";
                         cout << "1.By Student Id\n";
+                        cout << "2.By Reverse Student Name\n";
+                        cout << "3.By Reverse Student Id\n";
                         int sort8;
                         cin >> sort8;
                         showStudentsByNumUC(manager,  num, sort8);
@@ -290,7 +302,7 @@ void Menu::showClassUCbyStudent (ScheduleManager& manager, int studentid, int so
     cout << "========================================\n";
 
 }
-void Menu::showUCbyStudent (ScheduleManager& manager, int studentid){
+void Menu::showUCbyStudent(ScheduleManager &manager, int studentid) {
     int sort=0;
     list<ClassUC> l= manager.listClassUCbyStudent(studentid, sort);
     list<string> res;
@@ -309,7 +321,7 @@ void Menu::showUCbyStudent (ScheduleManager& manager, int studentid){
 
 }
 
-void Menu::showClassbyStudent (ScheduleManager& manager, int studentid){
+void Menu::showClassbyStudent(ScheduleManager &manager, int studentid) {
     int sort=1;
     list<ClassUC> l= manager.listClassUCbyStudent(studentid, sort);
     set<string> res;
@@ -368,8 +380,8 @@ void Menu::showStudentsInUC(ScheduleManager &manager, string ucid, int sort){
     cout << "=============================================================\n";
 }
 
-void Menu::showUCbyYear(ScheduleManager &manager, int year){
-    list<UC> ucs = manager.listUCbyYear(year);
+void Menu::showUCbyYear(ScheduleManager &manager, int year, int sort) {
+    list<UC> ucs = manager.listUCbyYear(year, sort);
     cout << "==================================\n";
 
     cout<<"Year "<<year<<" has the following UC's:"<<"\n";
@@ -404,4 +416,4 @@ void Menu::showNumStudentsByClass(ScheduleManager &manager, string classid, stri
 }
 
 
-}
+

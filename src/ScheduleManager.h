@@ -146,9 +146,7 @@ public:
      * @param file
      */
     void readStudentsFile(const string& fname);
-
-    void orderByUCCode();
-    void orderByName();
+    
 
 
     /**
@@ -216,10 +214,36 @@ public:
      * @return List of the student's ClassSchedules
      */
     list<ClassSchedule> getStudentSchedule(int studentid);
-
+    /**
+     * Creates a list of Students that are enrolled in a given Class of UC
+     * @param classid String representing Code of the Class(Turma), we want to find the information about
+     * @param ucid String representing Code of the UC, we want to find the information about
+     * @param sort Integer representing sort method
+     * @return List of Students of the UC
+     */
     list<struct StudentCard> listStudentsInClass(string classid, string ucid, int sort);
+    
+    /**
+     * Creates a list of Students that are enrolled in a given UC
+     * @param ucid String representing Code of the UC, we want to find the information about
+     * @param sort Integer representing sort method
+     * @return List of StudentCards of the UC
+     */
     list<struct StudentCard> listStudentsInUC(string ucid, int sort);
-    list<UC> listUCbyYear(int year);
+    /**
+     * Creates a list of UC's of a given Year
+     * @param year Integer representing the given Year
+     * @param sort Integer representing sort method
+     * @return The list of UC's of a given Year
+     */
+    list<UC> listUCbyYear(int year, int sort);
+
+    /**
+     * Creates a list of the Students enrolled in more than a given number of UC's
+     * @param numuc Integer representing the number of uc's
+     * @param sort Integer representing sort method
+     * @return The list of Students enrolled in more than a given number of UC's
+     */
     list<Student> listStudentsByNumUC(int numuc, int sort);
 };
 

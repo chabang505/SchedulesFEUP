@@ -384,11 +384,30 @@ string ScheduleManager::changeStudentClasses(const Request& request) {
 bool sortClass(ClassUC a, ClassUC b) {
     return(a.getCodeClass()<b.getCodeClass());
 }
+bool sortUC(ClassUC a, ClassUC b) {
+    return(a.getCodeUC()<b.getCodeUC());
+}
+bool rsortClass(ClassUC a, ClassUC b) {
+    return(a.getCodeClass()>b.getCodeClass());
+}
+bool rsortUC(ClassUC a, ClassUC b) {
+    return(a.getCodeUC()>b.getCodeUC());
+}
 list<ClassUC> ScheduleManager::listClassUCbyStudent(int studentid, int sort) {
     auto it= findStudent(studentid);
     list<ClassUC> l1 = (*it).getClasses();
-    if(sort==1){
+
+    if(sort==0){
+        l1.sort(sortUC);
+    }
+    else if(sort==1){
         l1.sort(sortClass);
+    }
+    else if(sort==2){
+        l1.sort(rsortClass);
+    }
+    else if(sort==3){
+        l1.sort(rsortUC);
     }
     return l1;
 }
@@ -408,6 +427,12 @@ bool sortName(StudentCard& a, StudentCard& b) {
 }
 bool sortId(StudentCard& a, StudentCard& b) {
     return(a.getID()<b.getID());
+}
+bool rsortName(StudentCard& a, StudentCard& b) {
+    return(a.getName()>b.getName());
+}
+bool rsortId(StudentCard& a, StudentCard& b) {
+    return(a.getID()>b.getID());
 }
 list<StudentCard> ScheduleManager::listStudentsInClass(string classid, string ucid, int s){
     list<UC> l1;
@@ -438,6 +463,12 @@ list<StudentCard> ScheduleManager::listStudentsInClass(string classid, string uc
     else if(s==1){
         l3.sort(sortId);
     }
+    else if(s==2){
+        l3.sort(rsortName);
+    }
+    else if(s==3){
+        l3.sort(rsortId);
+    }
     return l3;
 }
 list<StudentCard> ScheduleManager::listStudentsInUC(string ucid, int s){
@@ -463,16 +494,39 @@ list<StudentCard> ScheduleManager::listStudentsInUC(string ucid, int s){
     else if(s==1){
         l3.sort(sortId);
     }
+    else if(s==2){
+        l3.sort(rsortName);
+    }
+    else if(s==3){
+        l3.sort(rsortId);
+    }
     return l3;
 }
-
-list<UC> ScheduleManager::listUCbyYear(int year){
+bool sortClass2(Turma a, Turma b) {
+    return(a.getCode()<b.getCode());
+}
+bool sortUC2(UC a, UC b) {
+    return(a.getCode()<b.getCode());
+}
+bool rsortClass2(Turma a, Turma b) {
+    return(a.getCode()>b.getCode());
+}
+bool rsortUC2(UC a, UC b) {
+    return(a.getCode()>b.getCode());
+}
+list<UC> ScheduleManager::listUCbyYear(int year, int s) {
     list<UC> ucs;
     for (Year y: years){
         if(y.getNumber()==year){
             ucs=y.getUCs();
             break;
         }
+    }
+    if (s==0){
+        ucs.sort(sortUC2);
+    }
+    else if(s==1){
+        ucs.sort(rsortUC2);
     }
     return ucs;
 }
@@ -481,6 +535,12 @@ bool sortName2(Student& a, Student& b) {
 }
 bool sortId2(Student& a, Student& b) {
     return(a.getId()<b.getId());
+}
+bool rsortName2(Student& a, Student& b) {
+    return(a.getName()>b.getName());
+}
+bool rsortId2(Student& a, Student& b) {
+    return(a.getId()>b.getId());
 }
 list<Student> ScheduleManager::listStudentsByNumUC(int numuc, int s){
     list<Student> res;
@@ -495,6 +555,12 @@ list<Student> ScheduleManager::listStudentsByNumUC(int numuc, int s){
     else if(s==1){
         res.sort(sortId2);
     }
+    else if(s==2){
+        res.sort(rsortName2);
+    }
+    else if(s==3){
+        res.sort(rsortId2);
+    }
     return res;
 }
 
@@ -503,19 +569,5 @@ bool ScheduleManager::sortUCCode(ClassSchedule a, ClassSchedule b) {
     return(a.getCodeUC()<b.getCodeUC());
 }
 
-void ScheduleManager::orderByUCCode(){
-    sort(classSchedules.begin(), classSchedules.end(), sortUCCode);
-}
 
-bool sortName(StudentCard a, StudentCard b) {
-    return(a.getName()<b.getName());
-}
-
-void ScheduleManager::orderByName(){
-    vector<Student> stemp;
-    for (Student s: students){
-        stemp.push_back(s);
-    }
-    sort(stemp.begin(), stemp.end(), sortName);
-}
 */
