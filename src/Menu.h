@@ -61,18 +61,37 @@ public:
 
     void ShowStudentSchedule(ScheduleManager &manager, int studentid);
     /**
-     *
+     *Prints the list of Students enrolled in a given Class(Turma) of a UC
      * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param classid
-     * @param ucid
-     * @param sort
+     * @param classid String representing Code of the Class(Turma), we want to find the information about
+     * @param ucid String representing Code of the UC, we want to find the information about
+     * @param sort Integer representing sort method
      */
 
     void showStudentsInClass(ScheduleManager &manager, string classid, string ucid, int sort);
+    /**
+     * Prints the list of Students enrolled in a given UC
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param ucid String representing Code of the UC, we want to find the information about
+     * @param sort Integer representing sort method
+     */
 
     void showStudentsInUC(ScheduleManager &manager, string ucid, int sort);
+    /**
+     * Prints the list of UC's of a given Year
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param year Integer representing the Year we want to find the information about
+     * @param sort Integer representing sort method
 
-    void showUCbyYear(ScheduleManager &manager, int year);
+     */
+
+    void showUCbyYear(ScheduleManager &manager, int year, int sort);
+    /**
+     * Prints the list of Students enrolled in more than a certain number of UC's
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param numuc Integer representing the number of uc's
+     * @param sort Integer representing sort method
+     */
 
     void showStudentsByNumUC(ScheduleManager &manager, int numuc, int sort);
 
@@ -83,12 +102,24 @@ public:
      */
     string intToWD(int weekDay);
 
-    /**
-     *
-     */
+   /**
+    * Prints Instructions to the user
+    */
     void show();
-
+    /**
+     * Prints the Number of Students in a given UC
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param ucid String representing Code of The UC, we want to find the information about
+     * @param sort Integer representing sort method
+     */
     void showNumStudentsByUC(ScheduleManager &manager, string ucid, int sort);
+    /**
+     *Prints the Number of Students in a given Class of a UC
+     * @param manager Reference to a ScheduleManager object that will perform the operation
+     * @param classid String representing Code of the Class(Turma), we want to find the information about
+     * @param ucid String representing Code of the UC, we want to find the information about
+     * @param sort Integer representing sort method
+     */
 
     void showNumStudentsByClass(ScheduleManager &manager, string classid, string ucid, int sort);
 };
