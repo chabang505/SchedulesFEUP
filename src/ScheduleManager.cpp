@@ -268,8 +268,13 @@ list<ClassSchedule> ScheduleManager::getStudentSchedule(int studentid) {
 
     return res;
 }
-
-list<StudentCard> ScheduleManager::listStudentsInClass(string classid, string ucid){
+bool sortName(StudentCard& a, StudentCard& b) {
+    return(a.getName()<b.getName());
+}
+bool sortId(StudentCard& a, StudentCard& b) {
+    return(a.getID()<b.getID());
+}
+list<StudentCard> ScheduleManager::listStudentsInClass(string classid, string ucid, int s){
     list<UC> l1;
     for (Year y: years){
         int n= findYear(classid);
@@ -292,7 +297,70 @@ list<StudentCard> ScheduleManager::listStudentsInClass(string classid, string uc
             break;
         }
     }
+    if (s==0){
+        l3.sort(sortName);
+    }
+    else if(s==1){
+        l3.sort(sortId);
+    }
     return l3;
+}
+list<StudentCard> ScheduleManager::listStudentsInUC(string ucid, int s){
+    list<UC>::iterator it;
+    list<Turma> l2;
+    for (Year y: years){
+        for (UC uc: y.getUCs()){
+            if(uc.getCode()==ucid){
+                l2=uc.getTurmas();
+                break;
+            }
+        }
+    }
+    list<StudentCard> l3;
+    for (Turma t: l2){
+        for (StudentCard s: t.getStudents()){
+            l3.push_back(s);
+        }
+    }
+    if (s==0){
+        l3.sort(sortName);
+    }
+    else if(s==1){
+        l3.sort(sortId);
+    }
+    return l3;
+}
+
+list<UC> ScheduleManager::listUCbyYear(int year){
+    list<UC> ucs;
+    for (Year y: years){
+        if(y.getNumber()==year){
+            ucs=y.getUCs();
+            break;
+        }
+    }
+    return ucs;
+}
+bool sortName2(Student& a, Student& b) {
+    return(a.getName()<b.getName());
+}
+bool sortId2(Student& a, Student& b) {
+    return(a.getId()<b.getId());
+}
+list<Student> ScheduleManager::listStudentsByNumUC(int numuc, int s){
+    list<Student> res;
+    for (Student s: students){
+        if ((s.getClasses()).size()>numuc){
+            res.push_back(s);
+        }
+    }
+    if (s==0){
+        res.sort(sortName2);
+    }
+    else if(s==1){
+        res.sort(sortId2);
+    }
+    return res;
 }
 
 /*
@@ -304,7 +372,7 @@ void ScheduleManager::orderByUCCode(){
     sort(classSchedules.begin(), classSchedules.end(), sortUCCode);
 }
 
-bool sortName(Student a, Student b) {
+bool sortName(StudentCard a, StudentCard b) {
     return(a.getName()<b.getName());
 }
 

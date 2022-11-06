@@ -39,7 +39,11 @@ void Menu::show(){
                 cout << "3.Check the UC's a student is enrolled in" << "\n";
                 cout << "4.Check the Classes a student is enrolled in" << "\n";
                 cout << "5.Check the Students enrolled in a Class of a UC" << "\n";
-
+                cout << "6.Check the Students enrolled in a UC" << "\n";
+                cout << "7.Check the UC's by Year" << "\n";
+                cout << "8.Check the Students enrolled in more than n UC'S" << "\n";
+                cout << "9.Check the number of Students enrolled in a UC" << "\n";
+                cout << "10.Check the number of Students enrolled in a Class of a UC" << "\n";
                 int n2;
                 cin >> n2;
                 switch (n2) {
@@ -68,14 +72,69 @@ void Menu::show(){
                         int id4; cin>>id4;
                         showClassbyStudent(manager, id4);
                         break;
-                    case 5:
-                        cout<<"Insert Class Code(ex:3LEIC07):";
-                        string classid; cin>>classid;
-                        cout<<"Insert UC Code(ex:L.EIC021):";
-                        string ucid; cin>>ucid;
-                        showStudentsInClass(manager, classid, ucid);
+                    case 5: {
+                        cout << "Insert Class Code(ex:3LEIC07):";
+                        string classid;
+                        cin >> classid;
+                        cout << "Insert UC Code(ex:L.EIC021):";
+                        string ucid;
+                        cin >> ucid;
+                        cout << "Choose Sorting Method:\n";
+                        cout << "0.By Student Name\n";
+                        cout << "1.By Student Id\n";
+                        int sort5;
+                        cin >> sort5;
+                        showStudentsInClass(manager, classid, ucid, sort5);
                         break;
-
+                    }
+                    case 6: {
+                        cout << "Insert UC Code(ex:L.EIC021):";
+                        string ucid;
+                        cin >> ucid;
+                        cout << "Choose Sorting Method:\n";
+                        cout << "0.By Student Name\n";
+                        cout << "1.By Student Id\n";
+                        int sort6;
+                        cin >> sort6;
+                        showStudentsInUC(manager,  ucid, sort6);
+                        break;
+                    }
+                    case 7: {
+                        cout << "Insert Year Number(Ex:1):";
+                        int year;
+                        cin >> year;
+                        showUCbyYear(manager,  year);
+                        break;
+                    }
+                    case 8: {
+                        cout << "Insert Num of UC's(Ex:2):";
+                        int num;
+                        cin >> num;
+                        cout << "Choose Sorting Method:\n";
+                        cout << "0.By Student Name\n";
+                        cout << "1.By Student Id\n";
+                        int sort8;
+                        cin >> sort8;
+                        showStudentsByNumUC(manager,  num, sort8);
+                        break;
+                    }
+                    case 9: {
+                        cout << "Insert UC Code(ex:L.EIC021):";
+                        string ucid;
+                        cin >> ucid;
+                        showNumStudentsByUC(manager,  ucid, 0);
+                        break;
+                    }
+                    case 10: {
+                        cout << "Insert Class Code(ex:3LEIC07):";
+                        string classid;
+                        cin >> classid;
+                        cout << "Insert UC Code(ex:L.EIC021):";
+                        string ucid;
+                        cin >> ucid;
+                        showNumStudentsByClass(manager, classid, ucid, 0);
+                        break;
+                    }
                 }
                 break;
             case 2:
@@ -286,8 +345,8 @@ void Menu::ShowStudentSchedule (ScheduleManager& manager, int studentid){
 
 }
 
-void Menu::showStudentsInClass(ScheduleManager &manager, string classid, string ucid){
-    list<StudentCard> l= manager.listStudentsInClass(classid, ucid);
+void Menu::showStudentsInClass(ScheduleManager &manager, string classid, string ucid, int sort){
+    list<StudentCard> l= manager.listStudentsInClass(classid, ucid, sort);
     cout << "=============================================================\n";
     cout<<"The list of Students enrolled in UC: "<<ucid<<", Class: "<<classid<<"\n";
     cout << "=============================================================\n";
@@ -297,3 +356,51 @@ void Menu::showStudentsInClass(ScheduleManager &manager, string classid, string 
     }
     cout << "=============================================================\n";
 }
+void Menu::showStudentsInUC(ScheduleManager &manager, string ucid, int sort){
+    list<StudentCard> l= manager.listStudentsInUC(ucid, sort);
+    cout << "=============================================================\n";
+    cout<<"The list of Students enrolled in UC: "<<ucid<<"\n";
+    cout << "=============================================================\n";
+
+    for (StudentCard s: l){
+        cout<<"Student Name: "<<s.getName()<<"; Id: "<<s.getID()<<"\n";
+    }
+    cout << "=============================================================\n";
+}
+
+void Menu::showUCbyYear(ScheduleManager &manager, int year){
+    list<UC> ucs = manager.listUCbyYear(year);
+    cout << "==================================\n";
+
+    cout<<"Year "<<year<<" has the following UC's:"<<"\n";
+    cout << "==================================\n";
+    for (UC uc: ucs){
+        cout<<"UC Code: "<<uc.getCode()<<"\n";
+    }
+    cout << "==================================\n";
+}
+void Menu::showStudentsByNumUC(ScheduleManager &manager, int numuc, int sort){
+    list<Student> l= manager.listStudentsByNumUC( numuc, sort);
+    cout << "======================================================================\n";
+    cout<<"List of Students that are enrolled in more than "<<numuc<<" UC's:"<<"\n";
+    cout << "======================================================================\n";
+    for (Student s: l){
+        cout<<"Student Name: "<<s.getName()<<"; Id: "<<s.getId()<<"\n";
+    }
+    cout << "======================================================================\n";
+}
+
+void Menu::showNumStudentsByUC(ScheduleManager &manager, string ucid, int sort){
+    list<StudentCard> l= manager.listStudentsInUC(ucid, sort);
+    cout << "=============================================================\n";
+    cout<<"The Num of Students enrolled in UC "<<ucid<<": "<<l.size()<<"\n";
+    cout << "=============================================================\n";
+}
+void Menu::showNumStudentsByClass(ScheduleManager &manager, string classid, string ucid, int sort){
+    list<StudentCard> l= manager.listStudentsInClass(classid, ucid, sort);
+    cout << "===================================================================\n";
+    cout<<"The Num of Students enrolled in UC "<<ucid<<"-> Class "<<classid<<": "<<l.size()<<"\n";
+    cout << "===================================================================\n";
+}
+
+

@@ -159,10 +159,14 @@ public:
 
     list<ClassSchedule> getStudentSchedule(int studentid);
 
-    list<struct StudentCard> listStudentsInClass(string classid, string ucid);
+    list<struct StudentCard> listStudentsInClass(string classid, string ucid, int sort);
+    list<struct StudentCard> listStudentsInUC(string ucid, int sort);
+    list<UC> listUCbyYear(int year);
+    list<Student> listStudentsByNumUC(int numuc, int sort);
 
 
-    _List_iterator<Year> findYear2(const string &codeClass);
+
+
 };
 
 
