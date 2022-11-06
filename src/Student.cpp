@@ -34,6 +34,10 @@ bool Student::operator==(const Student &s2) const {
     return this->id == s2.id;
 }
 
-void Student::addClass(const ClassUC& newClass) {
+void Student::addClassUC(const ClassUC& newClass) {
     this->classes.push_back(newClass);
+}
+
+void Student::removeClassUC(const ClassUC& classToRemove) {
+    this->classes.remove(classToRemove);
 }

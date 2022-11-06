@@ -16,77 +16,28 @@ public:
      * Default constructor for a Menu object
      */
     Menu();
-/*
-    void consultaMenu() {
-        recebePedido;
-        listPronta = enviaPedidoParaScheduleManager;
-        display(listPronta);
-    }
-
-- apresentar mensagem inicial
-- apresentar opçoes iniciais:
-  1. consulta
-  2. fazer pedido
-  3. sair
-
-  Menu 1.
-  1. listar alunos de uma turma ou UC - metodo_X()
-  2.
-  3.
-  4.
-  ...
-
-  Codigo UC Codigo Turma
-  Slot (dia da semana, hora de inicio, duracao, tipo)
-  Slot
-
- Dia da semana
- Cod UC Cod turma
- hora, duracao, tipo
-
-
-*/
-
 
     // student request methods
     /**
-     * Removes a student from a UC or class
-     * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param request Reference to a Request object that contains the student's request
-     * @return A string that reflects the success of the operation
+     * Receives a request from the user and passes it to the Schedule Manager
+     * @param manager The system's Schedule Manager
+     * @param request The request to be fulfilled
      */
-    string removeStudent(ScheduleManager& manager, Request& request);
+    void receiveRequest(ScheduleManager& manager, Request& request);
 
     /**
-     * Adds a student to a UC or class
-     * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param request Reference to a Request object that contains the student's request
-     * @return A string that reflects the success of the operation
+     * Processes the requests currently in the system
+     * @param manager The system's Schedule Manager
+     * @return Queue containing the result of each request
      */
-    string addStudent(ScheduleManager& manager, Request& request);
+    queue<string> processRequests(ScheduleManager& manager);
 
-    /**
-     * Performs a switch in a student's schedule, either between UCs or between classes
-     * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param request Reference to a Request object that contains the student's request
-     * @return A string that reflects the success of the operation
-     */
-    string changeStudentClass(ScheduleManager& manager, Request& request);
-
-    /**
-     * Performs multiple switches in a student's schedule, either between UCs or between classes
-     * @param manager Reference to a ScheduleManager object that will perform the operation
-     * @param request Reference to a Request object that contains the student's request
-     * @return A string that reflects the success of the operation
-     */
-    string changeStudentClasses(ScheduleManager& manager, Request& request);
-
+    //information display methods
     /**
      * Prints the ClassUCS that the student s is enrolled in
      * @param manager Reference to a ScheduleManager object that will perform the operation
      * @param studentid Id of the student we obtained information about
      */
-
     void showClassUCbyStudent (ScheduleManager& manager, int studentid, int sort);
     /**
      * Prints the uc codes of the classes student s is enrolled in
@@ -125,6 +76,16 @@ public:
 
     void showStudentsByNumUC(ScheduleManager &manager, int numuc, int sort);
 
+    /**
+     * Converts an int representing a day of the week into a presentable string
+     * @param weekDay Day to be converted
+     * @return String corresponding to the day of the week
+     */
+    string intToWD(int weekDay);
+
+    /**
+     *
+     */
     void show();
 
     void showNumStudentsByUC(ScheduleManager &manager, string ucid, int sort);

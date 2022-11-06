@@ -10,7 +10,6 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-
-    Menu m=Menu();
+    Menu menu = Menu();
 }
 

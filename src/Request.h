@@ -14,18 +14,30 @@ using namespace std;
 
 class Request {
 
-
     int type;
     int studentID;
+    ClassUC classUC = ClassUC("L.EIC099", "9LEIC99");
     list<ClassUC> currentClasses;
     list<ClassUC> requestedClasses;
 
 public:
-    // tipos de pedidos:
-    // remover aluno de turma/UC
-    // adicionar aluno a turma/UC
-    // alterar turma/UC de aluno
-    // alterar várias turmas/UC de aluno
+
+    /**
+     * Creates a new Request object
+     * @param t Type of the request
+     * @param id ID of the student making the request
+     * @param cc List of the classes the student wants to change
+     */
+    Request(int t, int id, list<ClassUC> & cc);
+
+    /**
+     * Creates a new Request object
+     * @param t Type of the request
+     * @param id ID of the student making the request
+     * @param cuc ClassUC intended for change (add/remove)
+     */
+    Request(int t, int id, ClassUC cuc);
+
     /**
      * Creates a new Request object
      * @param t Type of the request
@@ -33,13 +45,13 @@ public:
      * @param cc List of the classes the student wants to change
      * @param rc List of the classes the student wants to start attending
      */
+    Request(int t, int id, list<ClassUC> & cc, list<ClassUC> & rc);
+
 
     /**
      * Creates a new Request object
      * @param r1 Reference to an existing Request object
      */
-    Request(int t, int id, list<ClassUC> &cc, list<ClassUC> &rc);
-    Request(int t, int id, list<ClassUC> &cc);
     Request(const Request& r1);
 
     /**
@@ -55,6 +67,12 @@ public:
     int getStudentID() const;
 
     /**
+     * Returns the simple ClassUC on the request
+     * @return ClassUC on the request
+     */
+    ClassUC getClassUC() const;
+
+    /**
      * Returns the list of classes the student wants to change
      * @return List of classes the student wants to change
      */
@@ -65,6 +83,12 @@ public:
      * @return List of classes the student wants to start attending
      */
     list<ClassUC> getRequestedClasses() const;
+
+    /**
+     * Returns the first element in the currentClasses list
+     * @return First element in currentClasses list
+     */
+    ClassUC getFirstClassUC() const;
 
 };
 
